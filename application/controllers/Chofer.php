@@ -1,24 +1,24 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Movil extends CI_Controller {
+class Chofer extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
         // $this->load->library('form_validation');
-        $this->load->model('Movil_model', 'MovilModel');
+        $this->load->model('Chofer_model', 'ChoferModel');
         $this->load->helper('url');
 
         $this->form_validation->set_error_delimiters('<p class="invalid-feedback">', '</p>');
     }
 
     /**
-     * Mostrar Móviles
+     * Mostrar Choferes
      */
     public function mostrar(){
 
             $this->load->library('pagination');
-            $config['base_url'] = base_url('Movil/mostrar');
-            $config['total_rows'] = $this->MovilModel->num_movil();
+            $config['base_url'] = base_url('Chofer/mostrar');
+            $config['total_rows'] = $this->ChoferModel->num_chofer();
             $config['per_page'] = 10;
             $config['uri_segment'] = 3;
             $config['num_links'] = 5;
@@ -43,12 +43,12 @@ class Movil extends CI_Controller {
 
             $this->pagination->initialize($config);
 
-            $result = $this->MovilModel->get_pagination($config['per_page']);
-            $data['moviles'] = $result;
+            $result = $this->ChoferModel->get_pagination($config['per_page']);
+            $data['choferes'] = $result;
             $data['pagination'] = $this->pagination->create_links();
             //$data['moviles'] = $this->MovilModel->ver_todo();// funcion que se reemplazó por la de paginacion.
             $this->load->view('sis_header_private.php'); // Header File
-            $this->load->view('user/movil_view', $data);
+            $this->load->view('user/chofer_view', $data);
             $this->load->view('sis_footer_private.php'); // Footer File
     }
     /**
@@ -57,7 +57,7 @@ class Movil extends CI_Controller {
     public function index(){
 
             $this->load->view('sis_header_private.php'); // Header File
-            $this->load->view("user/movil_view");
+            $this->load->view("user/chofer_view");
             $this->load->view('sis_footer_private.php'); // Footer File
     }
     /**
@@ -74,7 +74,7 @@ class Movil extends CI_Controller {
                       'va' => trim($this->input->post('va'))
                         );
         //var_dump($data);
-        $ingresa = $this->MovilModel->guardar($data);
+        $ingresa = $this->ChoferModel->guardar($data);
         if($ingresa != false){
             $jsondata = array ('msg'=>'Registro exitoso');
         }else{
@@ -98,7 +98,7 @@ class Movil extends CI_Controller {
                       'val' => trim($this->input->post('val'))
                         );
         //var_dump($data);
-        $actualiza = $this->MovilModel->editar($data);
+        $actualiza = $this->ChoferModel->editar($data);
         if($actualiza != false){
             $jsondata = array ('msg'=>'Actualizacion exitosa');
         }else{
@@ -114,7 +114,7 @@ class Movil extends CI_Controller {
     public function elimina(){
         $data = $this->input->post('id');
         //var_dump($data);
-        $elimina = $this->MovilModel->eliminar($data);
+        $elimina = $this->ChoferModel->eliminar($data);
         
         if($elimina){
             $jsondata = array ('msg'=>'Eliminacion exitosa');

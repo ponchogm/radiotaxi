@@ -1,5 +1,5 @@
 <?php
-class Movil_model extends CI_Model{
+class Chofer_model extends CI_Model{
 	
 	public function ___construct(){
 		parent::___construct();
@@ -19,7 +19,7 @@ class Movil_model extends CI_Model{
         		'MovilValorMes' => $data['va']
 			);
 		
-		$this->db->insert('movil', $data);
+		$this->db->insert('chofer', $data);
 	}
 
 	/**
@@ -27,7 +27,7 @@ class Movil_model extends CI_Model{
      */
 	function ver_todo(){
 
-		$query = $this->db->get('movil');
+		$query = $this->db->get('chofer');
 		if($query->num_rows() > 0){
 			return $query;
 		}else{
@@ -50,8 +50,8 @@ class Movil_model extends CI_Model{
         		'MovilValorMes' => $data['val']
 			);
 		$this->db->where('MovilCodigo', $id);
-		$this->db->update('movil', $data);
-		$query = $this->db->get('movil');
+		$this->db->update('chofer', $data);
+		$query = $this->db->get('chofer');
 		if($query->num_rows() > 0){
 			return $query;
 		}else{
@@ -63,20 +63,21 @@ class Movil_model extends CI_Model{
      */
 	function eliminar($data){
 		$this->db->where('MovilCodigo', $data);
-		return $query = $this->db->delete('movil'); // Le pongo return para que le avise al controlador que hizo o no la eliminación
+		return $query = $this->db->delete('chofer'); // Le pongo return para que le avise al controlador que hizo o no la eliminación
 	}
 	/**
      * Retorna cantidad registros de una tabla en la base de datos
      */
-	function num_movil(){
-		$number = $this->db->query("select count(*) as number from movil")->row()->number;
+	function num_chofer(){
+		$number = $this->db->query("select count(*) as number from chofer")->row()->number;
 			return intval($number);
 	}
 	/**
      * Consulta que genera la paginación de registros en la base de datos
      */
 	function get_pagination($number_per_page){
-		return $this->db->get('movil', $number_per_page, $this->uri->segment(3));
+		/*return $this->db->get('chofer', $number_per_page, $this->uri->segment(3));*/
+		return $this->db->query("SELECT  * FROM chofer AS ch, comuna as co WHERE ch.ComunaCodigo = co.ComunaCodigo ORDER BY ch.ComunaCodigo", $number_per_page, $this->uri->segment(3));
 	}
 }
 ?>

@@ -43,7 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Vehículos <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                           <li><a href="<?= base_url('Movil/mostrar');?>">Moviles</a></li>
-                          <li><a href="#">Choferes</a></li>
+                          <li><a href="<?= base_url('Chofer/mostrar');?>">Choferes</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">
