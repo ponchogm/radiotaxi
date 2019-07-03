@@ -124,4 +124,12 @@ class Chofer extends CI_Controller {
         header('Content-type: application/json; charset=utf-8');
         echo json_encode($jsondata);
     }
-}
+    /**
+     * Buscador
+     */
+    public function buscar(){
+        $data = $this->input->post('buscar');
+        $resultado = $this->ChoferModel->buscar($data);
+        echo json_encode($resultado);
+    }
+}     

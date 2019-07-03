@@ -14,7 +14,7 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover"  id="chofer_tb">
                 <thead>
                     <tr>
                         <th>
@@ -60,7 +60,7 @@
                     <?php } ?>
                 </tbody>
             </table>
-            <div class="clearfix">
+            <div class="clearfix" id="pagination">
                 <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
                     <?php echo $pagination; ?>
             </div>
@@ -325,6 +325,37 @@
                             });                        
                             $('#deleteEmployeeModal').hide();
                              location.reload();
+                        });
+
+            //Búsqueda
+            $("#buscar").keyup(function(e){
+                e.preventDefault();
+                        $("#chofer_tb tbody").html('');
+                        $("#pagination").hide();
+                        //alert($("#buscar").val());
+                        var text = $('#buscar').val();
+                            console.log(text);
+                        $.ajax({
+                                   data: text,    // En data se puede utilizar un objeto JSON, un array o un query string
+                                   type: "POST",   //Cambiar a type: POST si necesario
+                                   dataType: "json",  // Formato de datos que se espera en la respuesta
+                                   url: "<?=base_url();?>Movil/buscar",  // URL a la que se enviará la solicitud Ajax
+                            })
+                           .done(function( data, textStatus, jqXHR ) {
+                                if ( console && console.log ) {
+                                    console.log(" data msg : "+ data.msg 
+                                    + " \n textStatus : " + textStatus
+                                    + " \n jqXHR.status : " + jqXHR.status );
+                                }
+                                })
+                            .fail(function( jqXHR, textStatus, errorThrown ) {
+                                    if ( console && console.log ) {
+                                        console.log( " La solicitud ha fallado,  textStatus : " +  textStatus 
+                                            + " \n errorThrown : "+ errorThrown
+                                            + " \n textStatus : " + textStatus
+                                            + " \n jqXHR.status : " + jqXHR.status );
+                                    }
+                            });
                         });
     });
     </script>

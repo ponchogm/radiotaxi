@@ -79,5 +79,14 @@ class Chofer_model extends CI_Model{
 		/*return $this->db->get('chofer', $number_per_page, $this->uri->segment(3));*/
 		return $this->db->query("SELECT  * FROM chofer AS ch, comuna as co WHERE ch.ComunaCodigo = co.ComunaCodigo ORDER BY ch.ComunaCodigo", $number_per_page, $this->uri->segment(3));
 	}
+	/**
+     * Busqueda de datos en la base
+     */
+	public function buscar(){
+		$this->db->from('chofer');
+		$this->db->like('ChoferApellidoPat', $data, 'both');
+		$res = $this->db->get();
+		return $res->result();
+	}
 }
 ?>
