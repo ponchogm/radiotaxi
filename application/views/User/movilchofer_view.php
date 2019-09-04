@@ -3,18 +3,18 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2>Administar <b>Choferes</b></h2>
+                        <h2>Administar <b>Móviles y Choferes</b></h2>
                     </div>
-                    <div class="col-sm-3">
-                        <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nuevo Chofer</span></a>
-                        <!-- <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Eliminar</span></a> -->                        
+                    <div class="col-sm-6">
+                        <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Asignar Móvil a Chofer</span></a>
+                        <!-- <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Eliminar</span></a> -->                       
                     </div>
-                    <div class="col-sm-3">
+                    <!-- <div class="col-sm-3">
                         <form><span><input type="text" style="color: #a0a0a0;" class="form-control" name="buscar" id="buscar" placeholder="Buscar datos"></span></form>                       
-                    </div>
+                    </div> -->
                 </div>
             </div>
-            <table class="table table-striped table-hover"  id="chofer_tb">
+            <table class="table table-striped table-hover" id="movilchofer_tb">
                 <thead>
                     <tr>
                         <th>
@@ -23,20 +23,19 @@
                                 <label for="selectAll"></label>
                             </span>
                         </th>
-                        <th>Rut Chofer</th>
-                        <th>Ap. Paterno</th>
-                        <th>Ap. Materno</th>
-                        <th>Nombres</th>
-                        <th>Dirección</th>
-                        <th>Teléfono</th>
-                        <th>Celular</th>
-                        <th>Comuna</th>
+                        <th>Chofer</th>
+                        <th>Número de Móvil</th>
+                        <th>Patente</th>
+                        <th>Marca y Modelo</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($choferes->result() as $row){ ?>
-                        <?php $rut = $row->ChoferRut; ?>
+                    <?php foreach($ver->result() as $row){ ?>
+                        <?php $nombre = $row->ChoferNombres." ".$row->ChoferApellidoPat; 
+                              $marcamodelo = $row->MovilMarca." - ".$row->MovilModelo;
+                              $cod = $row->MovilCodigo;
+                        ?>
                     <tr>
                         <td>
                             <span class="custom-checkbox">
@@ -44,24 +43,20 @@
                                 <label for="checkbox1"></label>
                             </span>
                         </td>
-                        <td><?= $rut;?></td>
-                        <td><?= $row->ChoferApellidoPat;?></td>
-                        <td><?= $row->ChoferApellidoMat;?></td>
-                        <td><?= $row->ChoferNombres;?></td>
-                        <td><?= $row->ChoferDireccion;?></td>
-                        <td><?= $row->ChoferFono;?></td>
-                        <td><?= $row->ChoferCelular;?></td>
-                        <td><?=$row->ComunaNombre;?></td>
+                        <td><?= $nombre;?></td>
+                        <td style="text-align: center;"><?= $row->MovilCodigo;?></td>
+                        <td><?= $row->MovilPatente;?></td>
+                        <td><?= $marcamodelo;?></td>                        
                         <td>
-                            <a href="#editEmployeeModal" class="edit" onClick="selMovil('<?php echo $rut."','".$row->ChoferApellidoPat."','".$row->ChoferApellidoMat."','".$row->ChoferDireccion."','".$row->ChoferFono."','".$row->ChoferCelular."','".$row->ComunaNombre; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" onClick="selMovilDel('<?php echo $rut; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
+                            <a href="#editEmployeeModal" class="edit" onClick="selMovilChofer('<?php echo $cod."','".$row->ChoferRut; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+                            <a href="#deleteEmployeeModal" class="delete" onClick="selMovilChoferDel('<?php echo $cod; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
                         </td>
                     </tr>
                     <?php } ?>
                 </tbody>
             </table>
             <div class="clearfix" id="pagination">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                <div class="hint-text">Mostrando <b>10</b> de <b><?php echo $total_reg; ?></b> registros</div>
                     <?php echo $pagination; ?>
             </div>
         </div>
@@ -72,45 +67,30 @@
             <div class="modal-content">
                 <form name="nuevo_form" id="nuevo_form">
                     <div class="modal-header">                      
-                        <h4 class="modal-title">Nuevo Móvil</h4>
+                        <h4 class="modal-title">Asignar Chofer a Móvil</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">                    
                         <div class="form-group">
-                            <input type="hidden" class="form-control" name="tco" id="tco" value="2">
-                        </div>                    
+                          <label for="sel1">Seleccione Chofer</label>
+                          <select id="cho" name="cho" class="form-control">
+                                <?php foreach ($choferdisp as $i) {
+                                    echo '<option value="'. $i->ChoferRut .'">'. $i->ChoferNombres." ".$i->ChoferApellidoPat .'</option>';
+                                } ?>
+                            </select>
+                        </div> 
                         <div class="form-group">
-                            <label>Rut Dueño</label>
-                            <input type="text" class="form-control" name="ru" id="ru" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Patente</label>
-                            <input type="text" class="form-control" name="pa" id="pa" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Marca</label>
-                            <input type="text" class="form-control" name="ma" id="ma" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Modelo</label>
-                            <input type="text" class="form-control" name="mo" id="mo" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Año</label>
-                            <input type="text" class="form-control" name="an" id="an" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Número Móvil</label>
-                            <input type="text" class="form-control" name="nu" id="nu" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Valor Mensual</label>
-                            <input type="text" class="form-control" name="va" id="va" required>
-                        </div>                  
+                          <label for="sel1">Seleccione Móvil</label>
+                          <select id="mov" name="mov" class="form-control">
+                                <?php foreach ($movildisp as $i) {
+                                    echo '<option value="'. $i->MovilCodigo .'">'. $i->MovilPatente .'</option>';
+                                } ?>
+                            </select>
+                        </div>                
                     </div>
                     <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-success" id="nuevo_btn" value="Aceptar">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                        <input type="submit" class="btn btn-success" id="nuevo_btn" value="Asignar">
                     </div>
                 </form>
             </div>
@@ -122,41 +102,26 @@
             <div class="modal-content">
                 <form name="editar_form" id="editar_form">
                     <div class="modal-header">                      
-                        <h4 class="modal-title">Editar Móvil</h4>
+                        <h4 class="modal-title">Editar Móvil - Chofer</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <input type="hidden" class="form-control" name="cod" id="cod">
-                        </div>                    
-                        <div class="form-group">
-                            <label>Rut Dueño</label>
-                            <input type="text" class="form-control" name="rut" id="rut" readonly>
+                       <div class="form-group">
+                          <label for="sel1">Comuna</label>
+                          <select id="ch" name="ch" class="form-control">
+                                <?php foreach ($choferes as $i) {
+                                    echo '<option value="'. $i->ChoferRut .'">'. $i->ChoferNombres." ".$i->ChoferApellidoPat .'</option>';
+                                } ?>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label>Patente</label>
-                            <input type="text" class="form-control" name="pat" id="pat">
-                        </div>
-                        <div class="form-group">
-                            <label>Marca</label>
-                            <input type="text" class="form-control" name="mar" id="mar">
-                        </div>
-                        <div class="form-group">
-                            <label>Modelo</label>
-                            <input type="text" class="form-control" name="mod" id="mod">
-                        </div>
-                        <div class="form-group">
-                            <label>Año</label>
-                            <input type="text" class="form-control" name="ano" id="ano">
-                        </div>
-                        <div class="form-group">
-                            <label>Número Móvil</label>
-                            <input type="text" class="form-control" name="num" id="num">
-                        </div>
-                        <div class="form-group">
-                            <label>Valor Mensual</label>
-                            <input type="text" class="form-control" name="val" id="val">
-                        </div>
+                          <label for="sel1">Comuna</label>
+                          <select id="mo" name="mo" class="form-control">
+                                <?php foreach ($moviles as $i) {
+                                    echo '<option value="'. $i->MovilCodigo .'">'. $i->MovilPatente .'</option>';
+                                } ?>
+                            </select>
+                        </div> 
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
@@ -189,18 +154,12 @@
         </div>
     </div>
     <script>
-        function selMovil(cod,rut,pat,mar,mod,ano,num,val){
-            $('#cod').val(cod);
-            $('#rut').val(rut);
-            $('#pat').val(pat);
-            $('#mar').val(mar);
-            $('#mod').val(mod);
-            $('#ano').val(ano);
-            $('#num').val(num);
-            $('#val').val(val);
+        function selMovilChofer(cod,rut){
+            $('#mo').val(cod);
+            $('#ch').val(rut);
             //console.log(id);
         }
-        function selMovilDel(cod){
+        function selMovilChoferDel(cod){
             $('#id').val(cod);
             //console.log(id);
         }
@@ -239,7 +198,7 @@
                                    data: datax,    // En data se puede utilizar un objeto JSON, un array o un query string
                                    type: "POST",   //Cambiar a type: POST si necesario
                                    dataType: "json",  // Formato de datos que se espera en la respuesta
-                                   url: "<?=base_url();?>Movil/ingresa",  // URL a la que se enviará la solicitud Ajax
+                                   url: "<?=base_url();?>MovilChofer/ingresa",  // URL a la que se enviará la solicitud Ajax
                             })
                            .done(function( data, textStatus, jqXHR ) {
                                 if ( console && console.log ) {
@@ -257,7 +216,7 @@
                                     }
                             });                        
                             $('#addEmployeeModal').hide();
-                             location.reload();
+                            location.reload();
                         });
 
             //  envia los nuevos datos para actualizar
@@ -273,7 +232,7 @@
                                    data: datax,    // En data se puede utilizar un objeto JSON, un array o un query string
                                    type: "POST",   //Cambiar a type: POST si necesario
                                    dataType: "json",  // Formato de datos que se espera en la respuesta
-                                   url: "<?=base_url();?>Movil/actualiza",  // URL a la que se enviará la solicitud Ajax
+                                   url: "<?=base_url();?>MovilChofer/actualiza",  // URL a la que se enviará la solicitud Ajax
                             })
                            .done(function( data, textStatus, jqXHR ) {
                                 if ( console && console.log ) {
@@ -306,7 +265,7 @@
                                    data: datax,    // En data se puede utilizar un objeto JSON, un array o un query string
                                    type: "POST",   //Cambiar a type: POST si necesario
                                    dataType: "json",  // Formato de datos que se espera en la respuesta
-                                   url: "<?=base_url();?>Movil/elimina",  // URL a la que se enviará la solicitud Ajax
+                                   url: "<?=base_url();?>MovilChofer/elimina",  // URL a la que se enviará la solicitud Ajax
                             })
                            .done(function( data, textStatus, jqXHR ) {
                                 if ( console && console.log ) {
@@ -326,36 +285,48 @@
                             $('#deleteEmployeeModal').hide();
                              location.reload();
                         });
-
             //Búsqueda
             $("#buscar").keyup(function(e){
                 e.preventDefault();
-                        $("#chofer_tb tbody").html('');
-                        $("#pagination").hide();
-                        //alert($("#buscar").val());
                         var text = $('#buscar').val();
-                            console.log(text);
-                        $.ajax({
-                                   data: text,    // En data se puede utilizar un objeto JSON, un array o un query string
-                                   type: "POST",   //Cambiar a type: POST si necesario
-                                   dataType: "json",  // Formato de datos que se espera en la respuesta
-                                   url: "<?=base_url();?>Movil/buscar",  // URL a la que se enviará la solicitud Ajax
-                            })
-                           .done(function( data, textStatus, jqXHR ) {
-                                if ( console && console.log ) {
-                                    console.log(" data msg : "+ data.msg 
-                                    + " \n textStatus : " + textStatus
-                                    + " \n jqXHR.status : " + jqXHR.status );
-                                }
-                                })
-                            .fail(function( jqXHR, textStatus, errorThrown ) {
-                                    if ( console && console.log ) {
-                                        console.log( " La solicitud ha fallado,  textStatus : " +  textStatus 
-                                            + " \n errorThrown : "+ errorThrown
-                                            + " \n textStatus : " + textStatus
-                                            + " \n jqXHR.status : " + jqXHR.status );
-                                    }
-                            });
-                        });
+                        var lt = $('#buscar').val().length;
+                        if(lt >= 3){
+                              $("#movil_tb tbody").html('');
+                                $("#pagination").hide();
+                                //alert($("#buscar").val());
+                                    console.log(text);
+                                    $.post( "<?=base_url();?>Movil/buscar", 
+                                        { data : text }, 
+                                        function(data){
+                                        var obj = JSON.parse(data);
+                                        var output = '';
+                                        $.each(obj, function(i,item){
+                                            output +=
+                                            '<tr>' +
+                                                '<td>' +
+                                                    '<span class="custom-checkbox">' +
+                                                        '<input type="checkbox" id="checkbox1" name="options[]" value="1">'+
+                                                        '<label for="checkbox1"></label>'+
+                                                    '</span>'+
+                                                '</td>'+
+                                                '<td>'+item.DuenoRut+'</td>'+
+                                                '<td>'+item.MovilPatente+'</td>'+
+                                                '<td>'+item.MovilMarca+'</td>'+
+                                                '<td>'+item.MovilModelo+'</td>'+
+                                                '<td>'+item.MovilAnio+'</td>'+
+                                                '<td>'+item.MovilNumero+'</td>'+
+                                                '<td>$'+item.MovilValorMes+'</td>'+
+                                                '<td><a href="#editEmployeeModal" class="edit" onClick="selMovil(\''+item.MovilCodigo+'\',\''+item.DuenoRut+'\',\''+item.MovilPatente+'\',\''+item.MovilMarca+'\',\''+item.MovilModelo+'\',\''+item.MovilAnio+'\',\''+item.MovilNumero+'\',\''+item.MovilValorMes+'\')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>'+
+                                                '<a href="#deleteEmployeeModal" class="delete" onClick="selMovilDel(\''+item.MovilCodigo+'\')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>'+
+                                                '</td>'+
+                                            '</tr>';
+                                        });
+                                        $("#movil_tb tbody").append(output);
+                                    });          
+                        }
+                                
+                });
     });
+        //var ambas = 'contiene "dobles comillas" y \'comillas simples\' sin problemas (Esto es solo un ejemplo del uso de las comillas dobles y simples)';
+        //console.log(ambas);
     </script>

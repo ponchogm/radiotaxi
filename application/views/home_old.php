@@ -14,9 +14,7 @@
 								Servicio de Excelencia				
 							</h1>
 							<p class="pt-20 pb-20 text-white">
-								Radio Taxi El Molino S.A., nace en el año 1996 por un grupo de empresarios de la Comuna de Lo Barnechea.
-								En el año 2000, esta agrupacion decide formalizar legalmente esta sociedad, permitiendonos integrarnos a la "Asociacion Gremial de Radio Taxis Particulares de Chile", que hasta la fecha prestamos servicios de transporte particular a importantes familias y empresas de la Region.
-								Radio Taxi El Molino S.A. esta compuesta por 5 socios, y una flota de mas de 30 vehiculos compuesta por Autos Ejecutivos, MiniVan y Van, los cuales estan dispuestos a brindarles un servicio eficiente, seguro y de calidad.  
+								Mas de 20 años de experiencia transportando a nuestros clientes.
 							</p>
 							<!-- <a href="#" class="primary-btn text-uppercase">Rent Car Now</a> -->
 						</div>
@@ -54,215 +52,202 @@
 				<div class="container">
 					<div class="row d-flex justify-content-center">
 						<div class="col-md-8 pb-40 header-text">
-							<h1>Nuestros Servicios</h1>
+							<h1>What Services we offer to our clients</h1>
+							<p>
+								Who are in extremely love with eco friendly system.
+							</p>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-4 col-md-6">
 							<div class="single-feature">
-								<h4><span class="lnr lnr-user"></span>Servicios a centros de Ski</h4>
-								<p align="justify">
-									Santiago es una de las pocas ciudades del mundo que tiene a menos de una hora una serie de centro de SKI, durante toda la temporada ofrecemos servicios de transporte para que disfrutes de todas estas actividades 
+								<h4><span class="lnr lnr-user"></span>Expert Technicians</h4>
+								<p>
+									Usage of the Internet is becoming more common due to rapid advancement of technology and power.
 								</p>
 							</div>
 						</div>
 						<div class="col-lg-4 col-md-6">
 							<div class="single-feature">
-								<h4><span class="lnr lnr-license"></span>Viajes al aeropuerto y terminales de buses</h4>
-								<p align="justify">
-									¿Necesitas viajar y no tienes como llegar al aeropuerto o terminal? Radio Taxis El Molino ofrece servicios de trasnporte hacia y desde el aeropuerto y los principales terminales de buses de la region Metropolitana  
+								<h4><span class="lnr lnr-license"></span>Professional Service</h4>
+								<p>
+									Usage of the Internet is becoming more common due to rapid advancement of technology and power.
 								</p>								
 							</div>
 						</div>
 						<div class="col-lg-4 col-md-6">
 							<div class="single-feature">
-								<h4><span class="lnr lnr-phone"></span>Servicios de Van y Mini Van</h4>
+								<h4><span class="lnr lnr-phone"></span>Great Support</h4>
 								<p>
-									¿Necesitas viajar en grupo? En radio Taxi el molino, ofrecemos servicios de MiniVan para una capacidad maxima de 7 personas. ¿Y si somos mas de 7? no te preocupes tambien disponemos de van para transportar hasta 15 personas
+									Usage of the Internet is becoming more common due to rapid advancement of technology and power.
 								</p>								
 							</div>
 						</div>
 						<div class="col-lg-4 col-md-6">
 							<div class="single-feature">
-								<h4><span class="lnr lnr-rocket"></span>Covenios con empresas</h4>
+								<h4><span class="lnr lnr-rocket"></span>Technical Skills</h4>
 								<p>
-									Radio Taxi el Molino ofrece convenios para empresas e instituciones con facturacion quincenal o mensual
+									Usage of the Internet is becoming more common due to rapid advancement of technology and power.
 								</p>				
 							</div>
 						</div>
 						<div class="col-lg-4 col-md-6">
 							<div class="single-feature">
-								<h4><span class="lnr lnr-diamond"></span>Viajes fuera de santiago</h4>
+								<h4><span class="lnr lnr-diamond"></span>Highly Recomended</h4>
 								<p>
-									Radio taxi el molino ofrece servicios de transporte dentro y fuera de santiago, ya sea es sus autos ejecutivos como tambien en sus servicios de van
+									Usage of the Internet is becoming more common due to rapid advancement of technology and power.
 								</p>								
 							</div>
 						</div>
 						<div class="col-lg-4 col-md-6">
 							<div class="single-feature">
-								<h4><span class="lnr lnr-bubble"></span>Reservas por Whatsapp</h4>
+								<h4><span class="lnr lnr-bubble"></span>Positive Reviews</h4>
 								<p>
-									Si necesitas solicitar un Radio Taxi y no te queda saldo en tu telefonos, puedes solicitar tu servicio via Whatsapp a nuestros numeros  .
+									Usage of the Internet is becoming more common due to rapid advancement of technology and power.
 								</p>									
 							</div>
 						</div>						
 					</div>
 				</div>	
 			</section>
-			<!-- End feature Area -->
-<!-- Inicio Area de imagenes -->
-	<section class="reviews-area section-gap" id="review">
-					<div class="container">
-						<div class="row d-flex justify-content-center">
-							<div class="col-md-8 pb-40 header-text text-center">
-								<h1>Nuestros Vehiculos</h1>
-							</div>
-						</div>					
-						<div class="row">
-							<div class="col-lg-4 col-md-6">
-							  <div class="single-review">
-									<img style="width:100%;" src="assets/img/auto.jpg" alt="">
-									<h1 class="text-center">Taxi Ejecutivo</h1>
-								<div class="mb-10 text-justify">
-									<br>
-									Todos nuestros autos cuentan con:
-									<br>
-									<li>Capacidad de 4 pasajeros</li>
-									<li>Aire acondicionado</li>
-									<li>Frenos ABS</li>
-									<li>Permisos correspondientes al dia</li>
-								</div>
-							  </div>
-							</div>
-							<div class="col-lg-4 col-md-6">
-								<div class="single-review">
-									<img style="width:100%;" src="assets/img/Mini.jpg" alt="">
-									<h1 class="text-center">Mini Van</h1>
-								<div class="mb-10 text-justify">
-									<br>
-									Todos nuestros autos cuentan con:
-									<br>
-									<li>Capacidad de 4 pasajeros</li>
-									<li>Aire acondicionado</li>
-									<li>Frenos ABS</li>
-									<li>Permisos correspondientes al dia</li>
-								</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6">
-								<div class="single-review">
-									<img style="width:100%;" src="assets/img/Van.jpg" alt="">
-									<h1 class="text-center">Van</h1>
-								 <div class="mb-10 text-justify">
-									<br>
-									Todos nuestros autos cuentan con:
-									<br>
-									<li>Capacidad de 4 pasajeros</li>
-									<li>Aire acondicionado</li>
-									<li>Frenos ABS</li>
-									<li>Permisos correspondientes al dia</li>
-								</div>
-								</div>
-							</div>
+			<!-- End feature Area -->		
+
+			<!-- Start home-about Area -->
+			<section class="home-about-area" id="about">
+				<div class="container-fluid">				
+					<div class="row justify-content-center align-items-center">
+						<div class="col-lg-6 no-padding home-about-left">
+							<img class="img-fluid" src="img/about-img.jpg" alt="">
+						</div>
+						<div class="col-lg-6 no-padding home-about-right">
+							<h1>Globally Connected <br>
+							by Large Network</h1>
+							<p>
+								<span>We are here to listen from you deliver exellence</span>
+							</p>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+								Ut enim ad minim. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
+							</p>
+							<a class="text-uppercase primary-btn" href="#">get details</a>
 						</div>
 					</div>
-	</section>							
-<!-- Fin Area de imagenes -->
-		<!-- Start model Area -->
+				</div>	
+			</section>
+			<!-- End home-about Area -->	
+
+			<!-- Start model Area -->
 			<section class="model-area section-gap" id="cars">
 				<div class="container">
 					<div class="row d-flex justify-content-center pb-40">
 						<div class="col-md-8 pb-40 header-text">
-							<h1 class="text-center pb-10">Nuestros Clientes</h1>
+							<h1 class="text-center pb-10">Choose your Desired Car Model</h1>
 							<p class="text-center">
 								Who are in extremely love with eco friendly system.
 							</p>
 						</div>
-					<!--Carousel Wrapper-->
-					<div id="multi-item-example" class="carousel slide carousel-multi-item carousel-multi-item-2" data-ride="carousel">
-
-					  <!--Slides-->
-					  <div class="carousel-inner" role="listbox">
-
-					    <!--First slide-->
-					    <div class="carousel-item active">
-
-					      <div class="col-md-3 mb-3">
-					        <div class="card">
-					          <img class="img-fluid" src="assets\img\Empresas\ferrari.png"
-					            alt="Card image cap">
-					        </div>
-					      </div>
-
-					      <div class="col-md-3 mb-3">
-					        <div class="card">
-					          <img class="img-fluid" src="assets\img\Empresas\LiderExpress.png"
-					            alt="Card image cap">
-					        </div>
-					      </div>
-
-					      <div class="col-md-3 mb-3">
-					        <div class="card">
-					          <img class="img-fluid" src="assets\img\Empresas\Radisson-blu.jpg"
-					            alt="Card image cap">
-					        </div>
-					      </div>
-
-					      <div class="col-md-3 mb-3">
-					        <div class="card">
-					          <img class="img-fluid" src="assets\img\Empresas\volks.jpg"
-					            alt="Card image cap">
-					        </div>
-					      </div>
-
-					    </div>
-					    <!--/.First slide-->
-
-					    <!--Second slide-->
-					    <div class="carousel-item">
-
-					      <div class="col-md-3 mb-3">
-					        <div class="card">
-					          <img class="img-fluid" src="assets\img\Empresas\infiniti.jpg"
-					            alt="Card image cap">
-					        </div>
-					      </div>
-
-					      <div class="col-md-3 mb-3">
-					        <div class="card">
-					          <img class="img-fluid" src="assets\img\Empresas\Espacio.jpg"
-					            alt="Card image cap">
-					        </div>
-					      </div>
-
-					      <div class="col-md-3 mb-3">
-					        <div class="card">
-					          <img class="img-fluid" src="assets\img\Empresas\Craighhouse.png"
-					            alt="Card image cap">
-					        </div>
-					      </div>
-
-					      <div class="col-md-3 mb-3">
-					        <div class="card">
-					          <img class="img-fluid" src="assets\img\Empresas\Zentrum.png"
-					            alt="Card image cap">
-					        </div>
-					      </div>
-
-					    </div>
-					    <!--/.Second slide-->
-
-					  </div>
-					  <!--/.Slides-->
-
+					</div>				
+					<div class="active-model-carusel">
+						<div class="row align-items-center single-model item">
+							<div class="col-lg-6 model-left">
+								<div class="title justify-content-between d-flex">
+									<h4 class="mt-20">Audi 3000 msi</h4>
+									<h2>$149<span>/day</span></h2>
+								</div>
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+								</p>
+								<p>
+									Capacity         : 04 Person <br>
+									Doors            : 04 <br>
+									Air Condition    : Dual Zone <br>
+									Transmission     : Automatic
+								</p>
+								<a class="text-uppercase primary-btn" href="#">Book This Car Now</a>
+							</div>
+							<div class="col-lg-6 model-right">
+								<img class="img-fluid" src="img/car.jpg" alt="">
+							</div>
+						</div>
+						<div class="row align-items-center single-model item">
+							<div class="col-lg-6 model-left">
+								<div class="title justify-content-between d-flex">
+									<h4 class="mt-20">Audi 3000 msi</h4>
+									<h2>$149<span>/day</span></h2>
+								</div>
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+								</p>
+								<p>
+									Capacity         : 04 Person <br>
+									Doors            : 04 <br>
+									Air Condition    : Dual Zone <br>
+									Transmission     : Automatic
+								</p>
+								<a class="text-uppercase primary-btn" href="#">Book This Car Now</a>
+							</div>
+							<div class="col-lg-6 model-right">
+								<img class="img-fluid" src="img/car.jpg" alt="">
+							</div>
+						</div>
+						<div class="row align-items-center single-model item">
+							<div class="col-lg-6 model-left">
+								<div class="title justify-content-between d-flex">
+									<h4 class="mt-20">Audi 3000 msi</h4>
+									<h2>$149<span>/day</span></h2>
+								</div>
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+								</p>
+								<p>
+									Capacity         : 04 Person <br>
+									Doors            : 04 <br>
+									Air Condition    : Dual Zone <br>
+									Transmission     : Automatic
+								</p>
+								<a class="text-uppercase primary-btn" href="#">Book This Car Now</a>
+							</div>
+							<div class="col-lg-6 model-right">
+								<img class="img-fluid" src="img/car.jpg" alt="">
+							</div>
+						</div>												
 					</div>
-					<!--/.Carousel Wrapper-->
-									</div>	
-								</section>
-			<!-- End model Area -->		
+				</div>	
+			</section>
+			<!-- End model Area -->
+
+
+			<!-- Start fact Area -->
+			<section class="facts-area section-gap">
+				<div class="container">
+					<div class="row">
+						<div class="col single-fact">
+							<h1 class="counter">2536</h1>
+							<p>Projects Completed</p>
+						</div>
+						<div class="col single-fact">
+							<h1 class="counter">6784</h1>
+							<p>Really Happy Clients</p>
+						</div>
+						<div class="col single-fact">
+							<h1 class="counter">1059</h1>
+							<p>Total Tasks Completed</p>
+						</div>
+						<div class="col single-fact">
+							<h1 class="counter">2239</h1>
+							<p>Cups of Coffee Taken</p>
+						</div>	
+						<div class="col single-fact">
+							<h1 class="counter">435</h1>
+							<p>In House Professionals</p>
+						</div>												
+					</div>
+				</div>	
+			</section>
+			<!-- end fact Area -->							
 
 			<!-- Start reviews Area -->
-			<!--<section class="reviews-area section-gap" id="review">
+			<section class="reviews-area section-gap" id="review">
 				<div class="container">
 					<div class="row d-flex justify-content-center">
 						<div class="col-md-8 pb-40 header-text text-center">
@@ -365,7 +350,7 @@
 						</div>												
 					</div>
 				</div>	
-			</section>-->
+			</section>
 			<!-- End reviews Area -->
 			
 

@@ -1,5 +1,5 @@
 <?php
-class Chofer_model extends CI_Model{
+class Vale_model extends CI_Model{
 	
 	public function ___construct(){
 		parent::___construct();
@@ -8,20 +8,69 @@ class Chofer_model extends CI_Model{
      * Guarda Nuevo Registro en la base de datos
      */
 	function guardar($data){
+		$hoy = date("d-m-Y");
 		$data = array(
-        		'ChoferRut' => $data['ru'],
-        		'ChoferNombres' => $data['no'],
-        		'ChoferApellidoPat' => $data['pa'],
-        		'ChoferApellidoMat' => $data['ma'],
-        		'ChoferDireccion' => $data['di'],
-        		'ChoferFono' => $data['tf'],
-        		'ChoferCelular' => $data['ce'],
-        		'ComunaCodigo' => $data['co']
+        		'TalonarioInicio' => $data['inicio'],
+        		'TalonarioTermino' => $data['termino'],
+        		'TalonarioEstado' => '1',
+        		'TalonarioFechaIngreso' => $hoy
 			);
 		
-		$this->db->insert('chofer', $data);
+		$this->db->insert('talonario', $data);
 	}
+	/**
+     * Guarda asignacion de talonarios a clientes
+     */
+	function asignaCli($data){
 
+		$cadena = $data['talonarios'];
+		$array = explode(",", $cadena);
+		$id_tal = $array[0];
+		$cad_talon = $array[1];
+		$array2 = explode(" - ", $cad_talon);
+		$f_inicio = $array2[0];
+		$f_final = $array2[1];
+
+		$data = array(
+			'RutCliente'	=> $data['clientes'],
+			'id_talonario'	=> $id_tal,
+			'estado'		=> '1',
+			'folio_inicio'	=> $f_inicio,
+			'folio_final'	=> $f_final
+			);
+		$this->db->insert('talonario_cliente', $data);
+	}
+	/**
+     * Guarda asignacion de talonarios a moviles
+     */
+	function asignaMov($data){
+
+		$cadena = $data['talonarios'];
+		$array = explode(",", $cadena);
+		$id_tal = $array[0];
+		$cad_talon = $array[1];
+		$array2 = explode(" - ", $cad_talon);
+		$f_inicio = $array2[0];
+		$f_final = $array2[1];
+
+		$data = array(
+			'id_movil'		=> $data['moviles'],
+			'id_talonario'	=> $id_tal,
+			'estado'		=> '1',
+			'folio_inicio'	=> $f_inicio,
+			'folio_final'	=> $f_final
+		);
+
+		$this->db->insert('talonario_movil', $data);
+
+		$data2 = array(
+			'MovilCodigo'		=> $data2['moviles'],
+			'TalonarioCodigo'	=> $id_tal,
+			'ValeNumero'		=> $f_inicio
+		);
+
+		$this->db->insert('vale', $data2);
+	}
 	/**
      * Muestra todos los Registros de la base de datos
      */
@@ -97,6 +146,21 @@ class Chofer_model extends CI_Model{
         $query = $this->db->get('comuna');
 		if($query->num_rows() > 0){
 			return $query;
+		}else{
+			return FALSE;
+		}
+	}
+	/**
+     * Obtener numero del vale
+     */
+	public function getValeNum($id_tal){
+
+		$sql = ("SELECT * FROM vales_movil WHERE id_talonarioMovil = $id_tal ORDER BY numero_vale DESC LIMIT 1");
+		$consulta = $this->db->query($sql);
+
+		if($consulta->num_rows() > 0){
+
+			return $consulta->result();
 		}else{
 			return FALSE;
 		}

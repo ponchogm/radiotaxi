@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+    <title>Transportes el Molino</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -38,28 +38,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </div>
                   <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                      <li class="active"><a href="#">Home</a></li>
+                      <li class="active"><a href="#">Inicio</a></li>
                       <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Vehículos <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                           <li><a href="<?= base_url('Movil/mostrar');?>">Moviles</a></li>
                           <li><a href="<?= base_url('Chofer/mostrar');?>">Choferes</a></li>
+                          <li><a href="<?= base_url('MovilChofer/mostrar');?>">Movil-Chofer</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Personas <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li><a href="#">Clientes</a></li>
-                          <li><a href="#">Empresas</a></li>
-                          <li><a href="#">Convenios</a></li>
+                          <li><a href="<?= base_url('Cliente/mostrar');?>">Clientes</a></li>
+                          <li><a href="<?= base_url('Empresa/mostrar');?>">Empresas</a></li>
+                          <li><a href="<?= base_url('Convenio/mostrar');?>">Convenios</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Documentos <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li><a href="#">Talonarios</a></li>
-                          <li><a href="#">Vales</a></li>
-                          <li><a href="#">Reportes</a></li>
+                          <li><a href="<?= base_url('Vale');?>">Talonarios</a></li>
+                          <li><a href="<?= base_url('Vale/vales');?>">Vales</a></li>
+                          <!-- <li><a href="#">Vales</a></li>
+                          <li><a href="#">Reportes</a></li> -->
                         </ul>
                       </li>
                       <li class="dropdown">

@@ -78,5 +78,15 @@ class Movil_model extends CI_Model{
 	function get_pagination($number_per_page){
 		return $this->db->get('movil', $number_per_page, $this->uri->segment(3));
 	}
+	/**
+     * Busqueda de datos en la base
+     */
+	public function buscar($data){
+		//$res = $this->db->query("SELECT * FROM movil WHERE MovilMarca LIKE '%$data%'"); // esta es la forma tradicional que igual funca
+		$this->db->from('movil');
+		$this->db->like('MovilNumero',$data,'both');
+		$res = $this->db->get();
+		return $res->result();
+	}
 }
 ?>
