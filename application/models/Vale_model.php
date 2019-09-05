@@ -165,4 +165,28 @@ class Vale_model extends CI_Model{
 			return FALSE;
 		}
 	}
+	/**
+     * Guarda Vale en la base de datos
+     */
+	function guardarVale($data){
+		$hoy = date("d/m/Y");
+		$data = array(
+        		'id_talonarioMovil' => $data['movilTalonario'],
+        		'id_cliente' 		=> $data['cliente'],
+        		'id_adicional' 		=> $data['adicional'],
+        		//'id_convenio' 		=> $data['convenio'],
+        		'numero_vale' 		=> $data['vale'],
+        		//'direccion' 			=> $data['direccion'],
+        		'origen' 			=> $data['origen'],
+        		'destino' 			=> $data['destino'],
+        		'fecha' 			=> $data['fecha'],
+        		'hora' 				=> $data['hora'],
+        		'valor' 			=> $data['valor'],
+        		'observaciones' 	=> $data['obs'],
+        		'fecha_ingreso' 	=> $hoy
+        		//'usuario' 			=> $data['user']
+			);
+		//print_r($data);
+		$this->db->insert('vales_movil', $data);
+	}
 }

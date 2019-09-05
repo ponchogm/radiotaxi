@@ -11,6 +11,9 @@ class Vale extends CI_Controller {
 
         // $this->load->library('form_validation');
 
+        // load Session Library
+        $this->load->library('session');
+
         $this->load->model('Vale_model', 'ValeModel');
 
         $this->load->model('ComboBoxes_Model', 'ComboBoxes');
@@ -194,5 +197,43 @@ class Vale extends CI_Controller {
         else{
           echo json_encode($resultado[0]);
         }
+    }
+    /**
+
+     * Ingesa Nuevos Vales
+
+     */
+
+    public function ingresaVale(){
+      $cadena = $this->input->post('movilTalonario');
+      $array = explode(",", $cadena);
+        $id_tal = $array[0];
+        // print_r($id_tal);
+        $data = array('movilTalonario' => $id_tal,
+                        'vale'      => trim($this->input->post('vale')),
+                        'cliente'   => trim($this->input->post('cliente')),
+                        'adicional' => trim($this->input->post('adicional')),
+                        'tipovale'  => trim($this->input->post('tipovale')),
+                        'origen'    => trim($this->input->post('origen')),
+                        'destino'   => trim($this->input->post('destino')),
+                        'fecha'     => trim($this->input->post('fecha')),
+                        'hora'      => trim($this->input->post('hora')),
+                        'valor'     => trim($this->input->post('valor')),
+                        'obs'       => trim($this->input->post('obs'))
+                      );
+
+        //var_dump($data);
+        //print_r($data);
+        $ingresa = $this->ValeModel->guardarVale($data);
+        if($ingresa != false){
+
+            $jsondata = array ('msg'=>'Registro exitoso');
+          
+          }else{
+          
+            $jsondata = array ('msg'=>'Error de registro');
+          }
+          //header('Content-type: application/json; charset=utf-8');
+          //echo json_encode($jsondata);
     }
 }     

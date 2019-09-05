@@ -33,7 +33,7 @@
                                 } ?>
             </div>
             <div class="row">
-                <form name="guardarVale_form" action="">
+                <form name="guardarVale_form" id="guardarVale_form" action="">
                     <div class="row">
                         <div class="col-xs-6 form-group">
                             <label for="">Móvil</label>
@@ -57,14 +57,14 @@
                                     <option value="#">Selecione</option>
                                     <?php foreach ($clientes as $i) {
                                         $nombre = $i->ClienteNombres." ".$i->ClienteApellidoPat." ".$i->ClienteApellidoMat;
-                                        echo '<option value="'. $i->ClienteRut .'">'. $nombre .'</option>';
+                                        echo '<option value="'. $i->ClienteCodigo .'">'. $nombre .'</option>';
                                     } ?>
                                 </select>
                         </div>
                         <div class="col-xs-6 form-group">
                             <label for="">Adicional</label>
                                 <select id="adicional" name="adicional" class="form-control">
-                                    <option value="#">Selecione</option>
+                                    <option value="">Selecione</option>
                                     <!-- <?php foreach ($clientes as $i) {
                                         $nombre = $i->ClienteNombres." ".$i->ClienteApellidoPat." ".$i->ClienteApellidoMat;
                                         echo '<option value="'. $i->ClienteRut .'">'. $nombre .'</option>';
@@ -111,7 +111,7 @@
                                 <input class="form-control" id="obs" name="obs" type="text" />  
                         </div>
                         <div class="col-xs-6 form-group">
-                             <label for=""></label>
+                             <label for="">Guardar todos los datos</label>
                                 <input type="submit" class="btn btn-success form-control" id="guardarVale_btn" value="Grabar Vale">
                         </div>
                     </div>
@@ -275,7 +275,7 @@
                                    data: datax,    // En data se puede utilizar un objeto JSON, un array o un query string
                                    type: "POST",   //Cambiar a type: POST si necesario
                                    dataType: "json",  // Formato de datos que se espera en la respuesta
-                                   url: "<?=base_url();?>Vale/ingresa",  // URL a la que se enviará la solicitud Ajax
+                                   url: "<?=base_url();?>Vale/ingresaVale",  // URL a la que se enviará la solicitud Ajax
                             })
                            .done(function( data, textStatus, jqXHR ) {
                                 if ( console && console.log ) {
@@ -292,7 +292,7 @@
                                             + " \n jqXHR.status : " + jqXHR.status );
                                     }
                             });                        
-                            $('#talonNuevo').hide();
+                             alert("Vale ingresado Correctamente");
                              location.reload();
                         });
             //  Asigna talonariio a cliente
