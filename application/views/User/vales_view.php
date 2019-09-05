@@ -33,7 +33,7 @@
                                 } ?>
             </div>
             <div class="row">
-                <form name="test" action="">
+                <form name="guardarVale_form" action="">
                     <div class="row">
                         <div class="col-xs-6 form-group">
                             <label for="">Móvil</label>
@@ -262,11 +262,11 @@
                             }); 
 
             });
-            //  guardar nuevo talonario
-            $("#nuevo_btn").click(function(e){
+            //  guardar nuevo vale
+            $("#guardarVale_btn").click(function(e){
                 //alert("Hola");
                 e.preventDefault();
-                        var datax = $('#nuevo_form').serializeArray();
+                        var datax = $('#guardarVale_form').serializeArray();
                         $.each(datax, function(i, field){
                             console.log("contenido del form = "+ field.name + ":" + field.value + " ");
                         });
