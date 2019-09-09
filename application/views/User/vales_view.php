@@ -3,34 +3,50 @@
             <div class="table-title">
                <div class="row">
                     <div class="col-sm-4">
-                        <h2>Administar <b>Vales</b></h2>
+                        <h2>Administar <b>Vales</b> <?= $this->session->userdata('USER_NAME') ?></h2>
+                        <?php
+                        $hoy = date("d/m/Y");
+                        $array = explode("/", $hoy);
+                        $mes_actual = $array[1];
+                        echo $mes_actual;
+                        $anio_actual = $array[2];
+                        echo $anio_actual;
+                        ?>
                     </div>
                     <div class="col-sm-8">
-                        <a href="#talonMovil" data-toggle="modal" class="btn btn-warning"><i class="material-icons">&#xE147;</i> <span>Vales Móvil</span></a>
-                        <a href="#talonCliente" data-toggle="modal"class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Vales Cliente</span></a>
+                        <a href="#bloquearMes" data-toggle="modal" class="btn btn-danger"><i class="material-icons">&#xE147;</i> <span>Bloquear Mes</span></a>
+                        <a href="#habilitaMes" data-toggle="modal"class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Habilitar Mes</span></a>
                         <!-- <a href="#talonNuevo" data-toggle="modal" class="btn btn-primary"><i class="material-icons">&#xE147;</i> <span>Ingreso Talonario</span></a> -->           
                     </div>
                 </div>
             </div>
             <div class="row">
-                
-                <?php foreach ($ultimo_tal as $i) {
-                                    $talonario = $i->TalonarioInicio.'-'.$i->TalonarioTermino;
-                                    echo "Último Talonario ingresado: ".$talonario. "<p>";
-                                    echo "Con fecha: ".$i->TalonarioFechaIngreso;
-                                } ?>
-                <p>
-                <?php foreach ($tot_tal as $i) {
-                                    echo "Total de talonarios ingresados: ".$i->total;
-                                } ?>
-                <p>
-                <?php foreach ($tot_talMov as $i) {
-                                    echo "Talonarios asignados a móviles: ".$i->total;
-                                } ?>
-                <p>
-                <?php foreach ($tot_talCli as $i) {
-                                    echo "Talonarios asignados a clientes: ".$i->total;
-                                } ?>
+                <div class="col-xs-6">
+                    <?php foreach ($ultimo_tal as $i) {
+                                        $talonario = $i->TalonarioInicio.'-'.$i->TalonarioTermino;
+                                        echo "Último Talonario ingresado: ".$talonario. "<p>";
+                                        echo "Con fecha: ".$i->TalonarioFechaIngreso;
+                                    } ?>
+                    <p>
+                    <?php foreach ($tot_tal as $i) {
+                                        echo "Total de talonarios ingresados: ".$i->total;
+                                    } ?>
+                    <p>
+                    <?php foreach ($tot_talMov as $i) {
+                                        echo "Talonarios asignados a móviles: ".$i->total;
+                                    } ?>
+                    <p>
+                    <?php foreach ($tot_talCli as $i) {
+                                        echo "Talonarios asignados a clientes: ".$i->total;
+                                    } ?>
+                </div>
+                <div class="col-xs-6">
+                        <h4>Meses Habilitados para el ingreso de Vales</h4>
+                        <ul class="list-group list-group-horizontal">
+                            <?php foreach ($meses_hab as $i) { echo "<li class='list-group-item-warning'>".$i->MesesNombre."</li>"; } ?> 
+                        </ul>
+                    
+                </div>              
             </div>
             <div class="row">
                 <form name="guardarVale_form" id="guardarVale_form" action="">
@@ -82,27 +98,27 @@
                         </div>
                         <div class="col-xs-6 form-group">
                             <label for="">Origen</label>
-                                <input class="form-control" id="origen" name="origen" type="text" />
+                                <input class="form-control" id="origen" name="origen" type="text" required/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-6 form-group">
                             <label for="">Destino</label>
-                                <input class="form-control" id="destino" name="destino" type="text" />  
+                                <input class="form-control" id="destino" name="destino" type="text" required/>  
                         </div>
                         <div class="col-xs-6 form-group">
                             <label for="">Fecha Carrera</label>
-                                <input class="form-control" id="fecha" name="fecha" type="text" placeholder="ej: 12/03/2019" />
+                                <input class="form-control" id="fecha" name="fecha" type="text" placeholder="ej: 12/03/2019" required/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-6 form-group">
-                            <label for="">Hora llamado</label>
-                                <input class="form-control" id="hora" name="hora" type="text" placeholder="ej: 15:45" />  
+                            <label for="">Hora llamado (formato 24 hrs.)</label>
+                                <input class="form-control" id="hora" name="hora" type="text" placeholder="ej: 15:45" required/>  
                         </div>
                         <div class="col-xs-6 form-group">
                             <label for="">Valor</label>
-                                <input class="form-control" id="valor" name="valor" type="text" placeholder="Ingrese valor en pesos" />
+                                <input class="form-control" id="valor" name="valor" type="text" placeholder="Ingrese valor en pesos" required/>
                         </div>
                     </div>
                     <div class="row">
@@ -120,110 +136,62 @@
             </div>
         </div>
 </div>
-<!-- Modal de Talonario  Móvil -->
-    <div id="talonMovil" class="modal fade">
+<!-- Modal de Bloqueo de Mes -->
+    <div id="bloquearMes" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form name="talonMovil_form" id="talonMovil_form">
+                <form name="bloquearMes_form" id="bloquearMes_form">
                     <div class="modal-header">                      
-                        <h4 class="modal-title">Talonario Móvil</h4>
+                        <h4 class="modal-title">Bloqueo de Mes</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">                    
                         <div class="form-group">
-                            <label>Móviles</label>
-                                <select id="moviles" name="moviles" class="form-control">
-                                <?php foreach ($moviles as $i) {
-                                    $numero = $i->MovilNumero;
-                                    echo '<option value="'. $i->MovilCodigo .'">'. $numero .'</option>';
+                            <label>Meses Habilitados</label>
+                                <select id="meseshab" name="meseshab" class="form-control">
+                                <?php foreach ($meses_hab as $i) {
+                                    echo '<option value="'. $i->MesesCodigo .'">'. $i->MesesNombre .'</option>';
                                 } ?>
                             </select>
-                        </div>                    
-                         <div class="form-group">
-                          <label for="sel1">Talonarios Disponibles</label>
-                            <select id="talonarios" name="talonarios" class="form-control">
-                                <?php foreach ($talonarios as $i) {
-                                    $talonario = $i->TalonarioInicio .' - '. $i->TalonarioTermino;
-                                    echo '<option value="'. $i->TalonarioCodigo .','.$talonario.'">'. $talonario .'</option>';
-                                } ?>
-                            </select>
-                        </div>                 
+                        </div>                              
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-success" id="asignarMov_btn" value="Asignar">
+                        <input type="submit" class="btn btn-success" id="bloquearMes_btn" value="Bloquear Mes">
                     </div>
                 </form>
             </div>
         </div>
     </div>
-<!-- Fin Modal de Talonario  Móvil -->
-<!-- Modal de Talonario  Móvil -->
-    <div id="talonCliente" class="modal fade">
+<!-- Fin Modal de Bloqueo de mes -->
+<!-- Modal de Habilitar Mes -->
+    <div id="habilitaMes" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form name="talonCliente_form" id="talonCliente_form">
+                <form name="habilitaMes_form" id="habilitaMes_form">
                     <div class="modal-header">                      
-                        <h4 class="modal-title">Talonario Cliente</h4>
+                        <h4 class="modal-title">Habilitar Mes</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">                    
                         <div class="form-group">
-                            <label>Clientes</label>
-                                <select id="clientes" name="clientes" class="form-control">
-                                <?php foreach ($clientes as $i) {
-                                    $nombre = $i->ClienteRut.' - '. $i->ClienteNombres .'  '. $i->ClienteApellidoPat.'  '.$i->ClienteApellidoMat;
-                                    echo '<option value="'. $i->ClienteRut .'">'. $nombre .'</option>';
+                            <label>Meses Bloqueados</label>
+                                <select id="mesesbloq" name="mesesbloq" class="form-control">
+                                <?php foreach ($meses_bloq as $i) {
+                                    echo '<option value="'. $i->MesesCodigo .'">'. $i->MesesNombre .'</option>';
                                 } ?>
                             </select>
-                        </div>                    
-                         <div class="form-group">
-                          <label for="sel1">Talonarios Disponibles</label>
-                            <select id="talonarios" name="talonarios" class="form-control">
-                                <?php foreach ($talonarios as $i) {
-                                    $talonario = $i->TalonarioInicio .' - '. $i->TalonarioTermino;
-                                    echo '<option value="'. $i->TalonarioCodigo .','.$talonario.'">'. $talonario .'</option>';
-                                } ?>
-                            </select>
-                        </div>                 
+                        </div>                                    
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-success" id="asignarCli_btn" value="Asignar">
+                        <input type="submit" class="btn btn-success" id="habilitaMes_btn" value="Habilitar Mes">
                     </div>
                 </form>
             </div>
         </div>
     </div>
-<!-- Fin Modal de Talonario  Móvil -->
-<!-- Modal de Talonario  Móvil -->
-    <div id="talonNuevo" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form name="nuevo_form" id="nuevo_form">
-                    <div class="modal-header">                      
-                        <h4 class="modal-title">Nuevo Talonario</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">                    
-                        <div class="form-group">
-                            <label>Talonario Inicio</label>
-                            <input type="text" class="form-control" name="inicio" id="inicio" required>
-                        </div>                    
-                        <div class="form-group">
-                            <label>Talonario Término</label>
-                            <input type="text" class="form-control" name="termino" id="termino" required>
-                        </div>                 
-                    </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-success" id="nuevo_btn" value="Aceptar">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-<!-- Fin Modal de Talonario  Móvil -->   
+<!-- Fin Modal de Habilitar mes -->
     <script>
     $(document).ready(function(){
         //Selecciona el movil y carga el número de vale correspondiente
@@ -279,10 +247,11 @@
                             })
                            .done(function( data, textStatus, jqXHR ) {
                                 if ( console && console.log ) {
-                                    console.log(" data msg : "+ data.msg 
+                                    console.log(" data msg : "+ data.msg
                                     + " \n textStatus : " + textStatus
                                     + " \n jqXHR.status : " + jqXHR.status );
                                 }
+                                alert(data.msg);
                                 })
                             .fail(function( jqXHR, textStatus, errorThrown ) {
                                     if ( console && console.log ) {
@@ -292,14 +261,13 @@
                                             + " \n jqXHR.status : " + jqXHR.status );
                                     }
                             });                        
-                             alert("Vale ingresado Correctamente");
                              location.reload();
                         });
-            //  Asigna talonariio a cliente
-            $("#asignarCli_btn").click(function(e){
+            //  Bloquear Mes
+            $("#bloquearMes_btn").click(function(e){
                 //alert("Hola");
                 e.preventDefault();
-                        var datax = $('#talonCliente_form').serializeArray();
+                        var datax = $('#bloquearMes_form').serializeArray();
                         $.each(datax, function(i, field){
                             console.log("contenido del form = "+ field.name + ":" + field.value + " ");
                         });
@@ -308,7 +276,7 @@
                                    data: datax,    // En data se puede utilizar un objeto JSON, un array o un query string
                                    type: "POST",   //Cambiar a type: POST si necesario
                                    dataType: "json",  // Formato de datos que se espera en la respuesta
-                                   url: "<?=base_url();?>Vale/asignaCli",  // URL a la que se enviará la solicitud Ajax
+                                   url: "<?=base_url();?>Vale/bloquearMes",  // URL a la que se enviará la solicitud Ajax
                             })
                            .done(function( data, textStatus, jqXHR ) {
                                 if ( console && console.log ) {
@@ -325,14 +293,14 @@
                                             + " \n jqXHR.status : " + jqXHR.status );
                                     }
                             });                        
-                            $('#talonCliente_form').hide();
+                            $('#bloquearMes_form').hide();
                             location.reload();
                         });
              //  Asigna talonariio a Movil
-            $("#asignarMov_btn").click(function(e){
+            $("#habilitaMes_btn").click(function(e){
                 //alert("Hola");
                 e.preventDefault();
-                        var datax = $('#talonMovil_form').serializeArray();
+                        var datax = $('#habilitaMes_form').serializeArray();
                         $.each(datax, function(i, field){
                             console.log("contenido del form = "+ field.name + ":" + field.value + " ");
                         });
@@ -341,7 +309,7 @@
                                    data: datax,    // En data se puede utilizar un objeto JSON, un array o un query string
                                    type: "POST",   //Cambiar a type: POST si necesario
                                    dataType: "json",  // Formato de datos que se espera en la respuesta
-                                   url: "<?=base_url();?>Vale/asignaMov",  // URL a la que se enviará la solicitud Ajax
+                                   url: "<?=base_url();?>Vale/habilitaMes",  // URL a la que se enviará la solicitud Ajax
                             })
                            .done(function( data, textStatus, jqXHR ) {
                                 if ( console && console.log ) {
@@ -358,7 +326,7 @@
                                             + " \n jqXHR.status : " + jqXHR.status );
                                     }
                             });                        
-                            $('#talonMovil_form').hide();
+                            $('#habilitaMes_form').hide();
                             location.reload();
                         });
 

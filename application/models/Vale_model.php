@@ -170,6 +170,9 @@ class Vale_model extends CI_Model{
      */
 	function guardarVale($data){
 		$hoy = date("d/m/Y");
+		$array = explode("/", $hoy);
+		$mes_actual = $array[1];
+		$anio_actual = $array[2];
 		$data = array(
         		'id_talonarioMovil' => $data['movilTalonario'],
         		'id_cliente' 		=> $data['cliente'],
@@ -183,10 +186,65 @@ class Vale_model extends CI_Model{
         		'hora' 				=> $data['hora'],
         		'valor' 			=> $data['valor'],
         		'observaciones' 	=> $data['obs'],
-        		'fecha_ingreso' 	=> $hoy
+        		'fecha_ingreso' 	=> $hoy,
+        		'MesCodigo'			=> $mes_actual,
+        		'Periodo'			=> $anio_actual
         		//'usuario' 			=> $data['user']
 			);
 		//print_r($data);
-		$this->db->insert('vales_movil', $data);
+		if($this->db->insert('vales_movil', $data)){
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+
+
+	}
+	/**
+     * Habilita Mes para guardar Vales
+     */
+	function habilitaMes($data){
+			$cod = $data['mesesbloq'];
+			$data = array(
+				'estado' => 1
+			);
+		$this->db->where('MesesCodigo', $cod);
+		$this->db->update('meses', $data);
+		$query = $this->db->get('meses');
+		if($query->num_rows() > 0){
+			return $query;
+		}else{
+			return FALSE;
+		}
+	}
+	/**
+     * Habilita Mes para guardar Vales
+     */
+	function bloquearMes($data){
+			$cod = $data['meseshab'];
+			$data = array(
+				'estado' => 0
+			);
+		$this->db->where('MesesCodigo', $cod);
+		$this->db->update('meses', $data);
+		$query = $this->db->get('meses');
+		if($query->num_rows() > 0){
+			return $query;
+		}else{
+			return FALSE;
+		}
+	}
+	/**
+	* Consulta si se puede ingresar vale
+	**/
+	public function ingresoValeEstado($mes){
+		$sql = ("SELECT * FROM meses WHERE MesesCodigo = $mes AND estado = 1");
+		$consulta = $this->db->query($sql);
+		if($consulta->num_rows() > 0){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
 	}
 }

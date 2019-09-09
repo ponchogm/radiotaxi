@@ -120,4 +120,32 @@ class ComboBoxes_Model extends CI_Model{
             $consulta = $this->db->query($sql);
             return $consulta->result();
         }
+    /**
+     *   Obtiene listado de meses del año y sus codigos
+     */
+        public function meses(){
+            $this->db->from('meses');
+            $this->db->order_by("MesesCodigo", "asc");
+            $meses = $this->db->get(); 
+        
+            if($meses->num_rows() > 0){
+                return $meses->result();
+            }
+        }
+    /**
+     * Obtiene los meses bloqueados
+     */
+        public function getMesesBloq(){
+            $sql = ("SELECT * FROM meses WHERE estado = 0 ORDER BY MesesCodigo");
+            $consulta = $this->db->query($sql);
+            return $consulta->result();
+        }
+    /**
+     * Obtiene los meses habilitados
+     */
+        public function getMesesHab(){
+            $sql = ("SELECT * FROM meses WHERE estado = 1 ORDER BY MesesCodigo");
+            $consulta = $this->db->query($sql);
+            return $consulta->result();
+        }        
 }

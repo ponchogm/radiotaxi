@@ -185,11 +185,11 @@ class Usuarios extends CI_Controller {
 
                     'USERNAME'  => $result['data']->usuario_nombres,
 
-                    'USER_EMAIL' => $result['data']->usuario_correo,
+                    'USER_AP'  => $result['data']->usuario_pat,
+
+                    'USER_ROL' => $result['data']->usuario_rol
 
                 );
-
-                
 
                 $this->session->set_userdata($session_array);
 
@@ -224,7 +224,7 @@ class Usuarios extends CI_Controller {
 
          */
 
-        $remove_sessions = array('USER_ID', 'USERNAME','USER_EMAIL','USER_NAME');
+        $remove_sessions = array('USER_ID', 'USER_NAME', 'USERNAME','USER_AP','USER_ROL');
 
         $this->session->unset_userdata($remove_sessions);
 
@@ -251,6 +251,14 @@ class Usuarios extends CI_Controller {
 
         $this->load->view('sis_footer_private.php'); // Footer File
 
+    }
+    function valida_session(){
+        
+        if( !isset($_SESSION['USERNAME'])  ){
+            return false;
+        }else{
+            return true;
+        }
     }
 
 }

@@ -12,7 +12,7 @@ class Vale extends CI_Controller {
         // $this->load->library('form_validation');
 
         // load Session Library
-        $this->load->library('session');
+        //$this->load->library('session');
 
         $this->load->model('Vale_model', 'ValeModel');
 
@@ -156,6 +156,9 @@ class Vale extends CI_Controller {
     public function vales(){
 
             $data['talonarios'] = $this->ComboBoxes->getTalonarios();
+            $data['meses'] = $this->ComboBoxes->meses();
+            $data['meses_bloq'] = $this->ComboBoxes->getMesesBloq();
+            $data['meses_hab'] = $this->ComboBoxes->getMesesHab();
             $data['clientes'] = $this->ComboBoxes->getClientes();
             $data['moviles'] = $this->ComboBoxes->getMovilDisponibleTalonario();
             $data['ultimo_tal'] = $this->ComboBoxes->getLastTal();
@@ -206,34 +209,65 @@ class Vale extends CI_Controller {
 
     public function ingresaVale(){
       $cadena = $this->input->post('movilTalonario');
+      $fecha = $this->input->post('fecha');
+      $separa = explode("/", $fecha);
+      $mes = $separa[1];
       $array = explode(",", $cadena);
-        $id_tal = $array[0];
-        // print_r($id_tal);
-        $data = array('movilTalonario' => $id_tal,
-                        'vale'      => trim($this->input->post('vale')),
-                        'cliente'   => trim($this->input->post('cliente')),
-                        'adicional' => trim($this->input->post('adicional')),
-                        'tipovale'  => trim($this->input->post('tipovale')),
-                        'origen'    => trim($this->input->post('origen')),
-                        'destino'   => trim($this->input->post('destino')),
-                        'fecha'     => trim($this->input->post('fecha')),
-                        'hora'      => trim($this->input->post('hora')),
-                        'valor'     => trim($this->input->post('valor')),
-                        'obs'       => trim($this->input->post('obs'))
-                      );
+      $id_tal = $array[0];
+         //print_r($mes);   
+          $data = array('movilTalonario' => $id_tal,
+                          'vale'      => trim($this->input->post('vale')),
+                          'cliente'   => trim($this->input->post('cliente')),
+                          'adicional' => trim($this->input->post('adicional')),
+                          'tipovale'  => trim($this->input->post('tipovale')),
+                          'origen'    => trim($this->input->post('origen')),
+                          'destino'   => trim($this->input->post('destino')),
+                          'fecha'     => trim($this->input->post('fecha')),
+                          'hora'      => trim($this->input->post('hora')),
+                          'valor'     => trim($this->input->post('valor')),
+                          'obs'       => trim($this->input->post('obs'))
+                        );
 
-        //var_dump($data);
-        //print_r($data);
-        $ingresa = $this->ValeModel->guardarVale($data);
-        if($ingresa != false){
-
-            $jsondata = array ('msg'=>'Registro exitoso');
-          
-          }else{
-          
-            $jsondata = array ('msg'=>'Error de registro');
-          }
-          //header('Content-type: application/json; charset=utf-8');
-          //echo json_encode($jsondata);
+          //var_dump($data);
+          //print_r($data);
+        $res = $this->ValeModel->ingresoValeEstado($mes);  // Con esto consulto si puede ingresar o no un vale del mes elegido
+        if($res!= FALSE){
+          $ingresa = $this->ValeModel->guardarVale($data);
+          if($ingresa != false){    
+              $msg = 'Registro exitoso';
+            }else{
+             $msg = "Error de registro";
+            }
+        }else{
+          $msg = 'Error: Periodo de Mes no permitido';
+        }
+         $response = array('msg' => $msg);
+        echo json_encode($response);
     }
+    /**
+     * Habilita Mes
+    */ 
+      public function habilitaMes(){
+        $data = $this->input->post();
+        $resultado = $this->ValeModel->habilitaMes($data);
+          if($resultado != false){    
+              echo "Registro exitoso";
+          
+            }else{
+              echo "Error de registro";
+            }
+      }
+    /**
+     * Bloquea Mes
+    */ 
+      public function bloquearMes(){
+        $data = $this->input->post();
+        $resultado = $this->ValeModel->bloquearMes($data);
+          if($resultado != false){    
+              echo "Registro exitoso";
+          
+            }else{
+              echo "Error de registro";
+            }
+      }  
 }     
