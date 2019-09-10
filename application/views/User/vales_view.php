@@ -98,27 +98,27 @@
                         </div>
                         <div class="col-xs-6 form-group">
                             <label for="">Origen</label>
-                                <input class="form-control" id="origen" name="origen" type="text" required/>
+                                <input class="form-control" id="origen" name="origen" type="text" required />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-6 form-group">
                             <label for="">Destino</label>
-                                <input class="form-control" id="destino" name="destino" type="text" required/>  
+                                <input class="form-control" id="destino" name="destino" type="text" required />  
                         </div>
                         <div class="col-xs-6 form-group">
                             <label for="">Fecha Carrera</label>
-                                <input class="form-control" id="fecha" name="fecha" type="text" placeholder="ej: 12/03/2019" required/>
+                                <input class="form-control" id="fecha" name="fecha" type="text" placeholder="ej: 12/03/2019" required />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-6 form-group">
                             <label for="">Hora llamado (formato 24 hrs.)</label>
-                                <input class="form-control" id="hora" name="hora" type="text" placeholder="ej: 15:45" required/>  
+                                <input class="form-control" id="hora" name="hora" type="text" placeholder="ej: 15:45" required />  
                         </div>
                         <div class="col-xs-6 form-group">
                             <label for="">Valor</label>
-                                <input class="form-control" id="valor" name="valor" type="text" placeholder="Ingrese valor en pesos" required/>
+                                <input class="form-control" id="valor" name="valor" type="text" placeholder="Ingrese valor en pesos" required />
                         </div>
                     </div>
                     <div class="row">
@@ -251,7 +251,8 @@
                                     + " \n textStatus : " + textStatus
                                     + " \n jqXHR.status : " + jqXHR.status );
                                 }
-                                alert(data.msg);
+                                    alert(data.msg);
+                                    location.reload();
                                 })
                             .fail(function( jqXHR, textStatus, errorThrown ) {
                                     if ( console && console.log ) {
@@ -261,7 +262,6 @@
                                             + " \n jqXHR.status : " + jqXHR.status );
                                     }
                             });                        
-                             location.reload();
                         });
             //  Bloquear Mes
             $("#bloquearMes_btn").click(function(e){
