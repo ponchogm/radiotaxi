@@ -3,15 +3,7 @@
             <div class="table-title">
                <div class="row">
                     <div class="col-sm-4">
-                        <h2>Administar <b>Vales</b> <?= $this->session->userdata('USER_NAME') ?></h2>
-                        <?php
-                        $hoy = date("d/m/Y");
-                        $array = explode("/", $hoy);
-                        $mes_actual = $array[1];
-                        echo $mes_actual;
-                        $anio_actual = $array[2];
-                        echo $anio_actual;
-                        ?>
+                        <h2>Administar <b>Vales</b> Móvil</h2>
                     </div>
                     <div class="col-sm-8">
                         <a href="#bloquearMes" data-toggle="modal" class="btn btn-danger"><i class="material-icons">&#xE147;</i> <span>Bloquear Mes</span></a>
@@ -39,6 +31,7 @@
                     <?php foreach ($tot_talCli as $i) {
                                         echo "Talonarios asignados a clientes: ".$i->total;
                                     } ?>
+                    <p><a href="<?= base_url('Vale/valesCli');?>">Vales Clientes</a>
                 </div>
                 <div class="col-xs-6">
                         <h4>Meses Habilitados para el ingreso de Vales</h4>

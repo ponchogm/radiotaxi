@@ -121,6 +121,14 @@ class ComboBoxes_Model extends CI_Model{
             return $consulta->result();
         }
     /**
+     * Obtiene los clientes que están asignados a un talonario en uso
+     */
+        public function getClienteTalonario(){
+            $sql = ("SELECT * FROM talonario_cliente WHERE talonario_cliente.estado = 1");
+            $consulta = $this->db->query($sql);
+            return $consulta->result();
+        }    
+    /**
      *   Obtiene listado de meses del año y sus codigos
      */
         public function meses(){

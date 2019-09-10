@@ -166,7 +166,7 @@ class Vale_model extends CI_Model{
 		}
 	}
 	/**
-     * Guarda Vale en la base de datos
+     * Guarda Vale de móvil en la base de datos
      */
 	function guardarVale($data){
 		$hoy = date("d/m/Y");
@@ -193,6 +193,42 @@ class Vale_model extends CI_Model{
 			);
 		//print_r($data);
 		if($this->db->insert('vales_movil', $data)){
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+
+
+	}
+	/**
+     * Guarda Vale de cliente en la base de datos
+     */
+	function guardarValeCli($data){
+		$hoy = date("d/m/Y");
+		$array = explode("/", $hoy);
+		$mes_actual = $array[1];
+		$anio_actual = $array[2];
+		$data = array(
+        		'id_talonarioCliente' => $data['tal'],
+        		'id_cliente' 		=> $data['cliente'],
+        		'id_adicional' 		=> $data['adicional'],
+        		//'id_convenio' 		=> $data['convenio'],
+        		'numero_vale' 		=> $data['vale'],
+        		//'direccion' 			=> $data['direccion'],
+        		'origen' 			=> $data['origen'],
+        		'destino' 			=> $data['destino'],
+        		'fecha' 			=> $data['fecha'],
+        		'hora' 				=> $data['hora'],
+        		'valor' 			=> $data['valor'],
+        		'observaciones' 	=> $data['obs'],
+        		'fecha_ingreso' 	=> $hoy,
+        		'MesCodigo'			=> $mes_actual,
+        		'Periodo'			=> $anio_actual
+        		//'usuario' 			=> $data['user']
+			);
+		//print_r($data);
+		if($this->db->insert('vales_cliente', $data)){
 			return TRUE;
 		}
 		else{
@@ -238,13 +274,21 @@ class Vale_model extends CI_Model{
 	/**
 	* Consulta si se puede ingresar vale
 	**/
-	public function ingresoValeEstado($mes){
-		$sql = ("SELECT * FROM meses WHERE MesesCodigo = $mes AND estado = 1");
-		$consulta = $this->db->query($sql);
-		if($consulta->num_rows() > 0){
-			return TRUE;
+	public function ingresoValeEstado($date){
+		$mes = $date['mes'];
+		$year = $date['anio'];
+		$anio = date('Y');
+			if($year==$anio){
+			$sql = ("SELECT * FROM meses WHERE MesesCodigo = $mes AND estado = 1");
+			$consulta = $this->db->query($sql);
+			if($consulta->num_rows() > 0){
+				return TRUE;
+			}else{
+				return FALSE;
+			}
 		}else{
-			return FALSE;
+			return false;
 		}
 	}
+
 }

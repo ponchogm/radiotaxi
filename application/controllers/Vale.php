@@ -179,6 +179,37 @@ class Vale extends CI_Controller {
     }
     /**
 
+     * Pagina de inicio de los vales de los clientes
+
+     */
+
+    public function valesCli(){
+
+            $data['talonarios'] = $this->ComboBoxes->getTalonarios();
+            $data['meses'] = $this->ComboBoxes->meses();
+            $data['meses_bloq'] = $this->ComboBoxes->getMesesBloq();
+            $data['meses_hab'] = $this->ComboBoxes->getMesesHab();
+            $data['clientes'] = $this->ComboBoxes->getClientes();
+            $data['moviles'] = $this->ComboBoxes->getMoviles();
+            $data['ultimo_tal'] = $this->ComboBoxes->getLastTal();
+            $data['tot_tal'] = $this->ComboBoxes->getTotTal();
+            $data['tot_talMov'] = $this->ComboBoxes->getTotTalMov();
+            $data['tot_talCli'] = $this->ComboBoxes->getTotTalCli();
+            $tot = $this->ComboBoxes->getTotTal();
+            $tt = array('tot' => $tot);
+            $data['page_title'] = $this->ComboBoxes->getTotTal();
+            $data['movilTalonario'] = $this->ComboBoxes->getMovilTalonario();
+            $data['clienteTalonario'] = $this->ComboBoxes->getClienteTalonario();
+
+            $this->load->view('sis_header_private.php'); // Header File
+
+            $this->load->view("User/valesCli_view", $data);
+
+            $this->load->view('sis_footer_private.php'); // Footer File
+
+    }
+    /**
+
      * Ingesa Nuevos Talonarios
 
      */
@@ -203,7 +234,7 @@ class Vale extends CI_Controller {
     }
     /**
 
-     * Ingesa Nuevos Vales
+     * Ingesa Nuevos Vales de Móviles
 
      */
 
@@ -212,6 +243,7 @@ class Vale extends CI_Controller {
       $fecha = $this->input->post('fecha');
       $separa = explode("/", $fecha);
       $mes = $separa[1];
+      $anio = $separa[2];
       $array = explode(",", $cadena);
       $id_tal = $array[0];
          //print_r($mes);   
@@ -230,7 +262,8 @@ class Vale extends CI_Controller {
 
           //var_dump($data);
           //print_r($data);
-        $res = $this->ValeModel->ingresoValeEstado($mes);  // Con esto consulto si puede ingresar o no un vale del mes elegido
+        $date = array('mes' => $mes, 'anio' => $anio);
+        $res = $this->ValeModel->ingresoValeEstado($date);  // Con esto consulto si puede ingresar o no un vale del mes elegido
         if($res!= FALSE){
           $ingresa = $this->ValeModel->guardarVale($data);
           if($ingresa != false){    
@@ -239,7 +272,51 @@ class Vale extends CI_Controller {
              $msg = "Error de registro";
             }
         }else{
-          $msg = 'Error: Periodo de Mes no permitido';
+          $msg = 'Error: Periodo NO permitido';
+        }
+         $response = array('msg' => $msg);
+        echo json_encode($response);
+    }
+    /**
+
+     * Ingesa Nuevos Vales de clientes
+
+     */
+
+    public function ingresaValeCli(){
+      //$cadena = $this->input->post('movilTalonario');
+      $fecha = $this->input->post('fecha');
+      $separa = explode("/", $fecha);
+      $mes = $separa[1];
+      $anio = $separa[2];
+         //print_r($mes);   
+          $data = array(  'vale'      => trim($this->input->post('vale')),
+                          'cliente'   => trim($this->input->post('cliente')),
+                          'adicional' => trim($this->input->post('adicional')),
+                          'tipovale'  => trim($this->input->post('tipovale')),
+                          'origen'    => trim($this->input->post('origen')),
+                          'destino'   => trim($this->input->post('destino')),
+                          'fecha'     => trim($this->input->post('fecha')),
+                          'hora'      => trim($this->input->post('hora')),
+                          'valor'     => trim($this->input->post('valor')),
+                          'obs'       => trim($this->input->post('obs')),
+                          'tal'       => trim($this->input->post('tal')),
+                          'movil'     => trim($this->input->post('movil'))
+                        );
+
+          //var_dump($data);
+          //print_r($data);
+        $date = array('mes' => $mes, 'anio' => $anio);
+        $res = $this->ValeModel->ingresoValeEstado($date);  // Con esto consulto si puede ingresar o no un vale del mes elegido
+        if($res!= FALSE){
+          $ingresa = $this->ValeModel->guardarValeCli($data);
+          if($ingresa != false){    
+              $msg = 'Registro exitoso';
+            }else{
+             $msg = "Error de registro";
+            }
+        }else{
+          $msg = 'Error: Periodo NO permitido';
         }
          $response = array('msg' => $msg);
         echo json_encode($response);
