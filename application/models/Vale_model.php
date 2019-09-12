@@ -156,8 +156,8 @@ class Vale_model extends CI_Model{
 	public function getValeNum($id_tal){
 
 		$sql = ("SELECT * FROM vales_movil WHERE id_talonarioMovil = $id_tal ORDER BY numero_vale DESC LIMIT 1");
+		
 		$consulta = $this->db->query($sql);
-
 		if($consulta->num_rows() > 0){
 
 			return $consulta->result();
@@ -209,6 +209,7 @@ class Vale_model extends CI_Model{
 		$array = explode("/", $hoy);
 		$mes_actual = $array[1];
 		$anio_actual = $array[2];
+		$vale = $data['vale'];
 		$data = array(
         		'id_talonarioCliente' => $data['tal'],
         		'id_cliente' 		=> $data['cliente'],
@@ -228,12 +229,19 @@ class Vale_model extends CI_Model{
         		//'usuario' 			=> $data['user']
 			);
 		//print_r($data);
-		if($this->db->insert('vales_cliente', $data)){
+		$sql = ("SELECT vales_cliente.numero_vale FROM vales_cliente WHERE vales_cliente.numero_vale = $vale");
+		$consulta = $this->db->query($sql);
+		if($consulta->num_rows() > 0){
+			return false;
+		}else{
+			if($this->db->insert('vales_cliente', $data)){
 			return TRUE;
 		}
-		else{
+			else{
 			return FALSE;
+			}
 		}
+		
 
 
 	}
@@ -289,6 +297,25 @@ class Vale_model extends CI_Model{
 		}else{
 			return false;
 		}
+	}
+	/**
+	* Buscar vale
+	**/
+	public function buscarVale($data){
+			$vale = $data;
+			
+			if(isset($vale)){
+				echo $vale;
+			}else{
+				return false;
+			}
+			/*$sql = ("SELECT * FROM vales_movil WHERE vales_movil.numero_vale = $vale UNION SELECT * FROM vales_cliente WHERE vales_cliente.numero_vale = $vale");
+			$consulta = $this->db->query($sql);
+			if($consulta->num_rows() > 0){
+				return $consulta->result();
+			}else{
+				return FALSE;
+			}*/
 	}
 
 }

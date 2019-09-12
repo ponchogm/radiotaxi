@@ -136,14 +136,20 @@ class Vale extends CI_Controller {
 
      */
 
-    public function buscar(){
+    public function buscarVale(){
 
         $data = $this->input->post('data');
 
-        //var_dump($data);// si era por el vardump qu no funcionaba e mensaje
+        var_dump($data);// si era por el vardump qu no funcionaba e mensaje
 
-        $resultado = $this->ChoferModel->buscar($data);
-
+        $resultado = $this->ValeModel->buscarVale($data);
+        if($resultado != FALSE){
+          $msg = "Encontré el resultado";
+        }else{
+          $msg = "No encontré niuna wea";
+        }
+        $respuesta = array('msg' => $msg);
+        echo json_encode($respuesta);
         echo json_encode($resultado);
 
     }
@@ -207,6 +213,17 @@ class Vale extends CI_Controller {
 
             $this->load->view('sis_footer_private.php'); // Footer File
 
+    }
+    /**
+    * Pagina de busqueda de Vales
+    **/
+    public function busqueda(){
+
+            $this->load->view('sis_header_private.php'); // Header File
+
+            $this->load->view("User/valesBusca_view");
+
+            $this->load->view('sis_footer_private.php'); // Footer File
     }
     /**
 
@@ -313,7 +330,7 @@ class Vale extends CI_Controller {
           if($ingresa != false){    
               $msg = 'Registro exitoso';
             }else{
-             $msg = "Error de registro";
+             $msg = "Error: El numero de vale ingresado ya existe!";
             }
         }else{
           $msg = 'Error: Periodo NO permitido';

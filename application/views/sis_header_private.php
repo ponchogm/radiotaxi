@@ -60,6 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <ul class="dropdown-menu">
                           <li><a href="<?= base_url('Vale');?>">Talonarios</a></li>
                           <li><a href="<?= base_url('Vale/vales');?>">Vales</a></li>
+                          <li><a href="<?= base_url('Vale/busqueda');?>">Buscar vales</a></li>
                           <!-- <li><a href="#">Vales</a></li>
                           <li><a href="#">Reportes</a></li> -->
                         </ul>
