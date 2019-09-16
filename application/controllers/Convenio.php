@@ -92,6 +92,9 @@ class Convenio extends CI_Controller {
 
             $data['convenios'] = $result;
 
+            $res = $this->ConvenioModel->ver_todo();
+            $data['todo'] = $res;
+
             $data['pagination'] = $this->pagination->create_links();
 
             $data['total_reg'] = $this->ConvenioModel->num_convenio();

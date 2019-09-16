@@ -6,7 +6,7 @@
                         <h2>Administar <b>Convenios</b></h2>
                     </div>
                     <div class="col-sm-3">
-                        <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nuevo Móvil</span></a>
+                        <a href="#nuevoConvenio" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nuevo Convenio</span></a>
                         <!-- <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Eliminar</span></a> -->                       
                     </div>
                     <div class="col-sm-3">
@@ -17,34 +17,16 @@
              <table class="table table-striped table-hover"  id="chofer_tb">
                 <thead>
                     <tr>
-                        <th>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="selectAll">
-                                <label for="selectAll"></label>
-                            </span>
-                        </th>
-                        <th>Rut Chofer</th>
-                        <th>Ap. Paterno</th>
-                        <th>Ap. Materno</th>
-                        <th>Nombres</th>
-                        <th>Dirección</th>
-                        <th>Teléfono</th>
-                        <th>Celular</th>
-                        <th>Comuna</th>
+                        <th>Rut Cliente</th>
+                        <th>Tipo de Convenio</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($convenios->result() as $row){ ?>
+                    <?php foreach($todo->result() as $row){ ?>
                     <tr>
-                        <td>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                <label for="checkbox1"></label>
-                            </span>
-                        </td>
-                        <td><?= $row->ConvenioCodigo;?></td>
                         <td><?= $row->ClienteRut;?></td>
+                        <td><?= $row->ConvenioTipoDesc;?></td>
                         <td>
                             <!-- <a href="#editEmployeeModal" class="edit" onClick="selChofer('<?php echo $rut."','".$row->ChoferNombres."','".$row->ChoferApellidoPat."','".$row->ChoferApellidoMat."','".$row->ChoferDireccion."','".$row->ChoferFono."','".$row->ChoferCelular."','".$row->ComunaCodigo; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
                             <a href="#deleteEmployeeModal" class="delete" onClick="selChoferDel('<?php echo $rut; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a> -->
@@ -54,8 +36,8 @@
                 </tbody>
             </table>
             <div class="clearfix" id="pagination">
-                <div class="hint-text">Mostrando <b>10</b> de <b><?php echo $total_reg; ?></b> registros</div>
-                    <?php echo $pagination; ?>
+                <!-- <div class="hint-text">Mostrando <b>10</b> de <b><?php echo $total_reg; ?></b> registros</div> -->
+                    <!-- <?php echo $pagination; ?> -->
             </div>
         </div>
     </div>

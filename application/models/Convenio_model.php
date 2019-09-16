@@ -26,8 +26,10 @@ class Convenio_model extends CI_Model{
      * Muestra todos los Registros de la base de datos
      */
 	function ver_todo(){
-
-		$query = $this->db->get('convenio');
+		$this->db->select('*');
+		$this->db->from('convenio');
+		$this->db->join('conveniotipo', 'convenio.ConvenioTipoCodigo = conveniotipo.ConvenioTipoCodigo');
+		$query = $this->db->get();
 		if($query->num_rows() > 0){
 			return $query;
 		}else{

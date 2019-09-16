@@ -304,18 +304,18 @@ class Vale_model extends CI_Model{
 	public function buscarVale($data){
 			$vale = $data;
 			
-			if(isset($vale)){
+			/*if(isset($vale)){
 				echo $vale;
 			}else{
 				return false;
-			}
-			/*$sql = ("SELECT * FROM vales_movil WHERE vales_movil.numero_vale = $vale UNION SELECT * FROM vales_cliente WHERE vales_cliente.numero_vale = $vale");
+			}*/
+			$sql = ("SELECT * FROM comuna, cliente, vales_movil WHERE vales_movil.numero_vale = $vale AND vales_movil.id_cliente = cliente.ClienteCodigo AND comuna.ComunaCodigo = cliente.ComunaCodigo UNION SELECT * FROM comuna, cliente, vales_cliente WHERE vales_cliente.numero_vale = $vale AND cliente.ClienteCodigo = vales_cliente.id_cliente AND comuna.ComunaCodigo = cliente.ComunaCodigo");
 			$consulta = $this->db->query($sql);
 			if($consulta->num_rows() > 0){
 				return $consulta->result();
 			}else{
 				return FALSE;
-			}*/
+			}
 	}
 
 }

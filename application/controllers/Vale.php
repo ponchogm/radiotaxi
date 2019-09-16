@@ -138,19 +138,20 @@ class Vale extends CI_Controller {
 
     public function buscarVale(){
 
-        $data = $this->input->post('data');
+       $data = $this->input->post('datos');
 
-        var_dump($data);// si era por el vardump qu no funcionaba e mensaje
-
+        //print_r($data);// si era por el vardump qu no funcionaba e mensaje
+        
         $resultado = $this->ValeModel->buscarVale($data);
         if($resultado != FALSE){
-          $msg = "Encontré el resultado";
+          //$msg = "Encontre el resultado";
+          echo json_encode($resultado[0]);
         }else{
-          $msg = "No encontré niuna wea";
+          //$msg = "No encontre niuna wea";
         }
-        $respuesta = array('msg' => $msg);
-        echo json_encode($respuesta);
-        echo json_encode($resultado);
+        //$respuesta = array('msg' => $msg);
+        //echo json_encode($respuesta);
+        
 
     }
     /**

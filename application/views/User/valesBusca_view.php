@@ -15,9 +15,9 @@
 </div>
     <script>
     $(document).ready(function(){     
-        $("#buscar").change(function(e){
+        $("#buscar").keypress(function(e){
+            if(e.which == 13){ //Con esto capturo el enter en el campo de datos
             e.preventDefault();
-            //alert($('select[id=movilTalonario]').val());
             var datax = $('#buscar').val();
             console.log(datax);
                             $.ajax({
@@ -28,9 +28,42 @@
                             })
                              .done(function( data, textStatus, jqXHR ) {
                                 
-                                console.log(data.id);
-                                console.log(data.id_talonarioMovil);
-                                console.log(data.numero_vale);
+                                console.log(data.Periodo);
+                                console.log(data.origen);
+                                console.log(data.destino);
+                                var output = '';
+                                            output +=
+                                            '<span><h5>Resultados de la búsqueda</h5></span>' +
+                                            '<table class="table table-striped table-hover">' +
+                                             '<thead>'+
+                                              '<tr>' +
+                                                 '<th> Vale </th>' +
+                                                 '<th> Rut Cliente </th>' +
+                                                 '<th> Origen </th>' +
+                                                 '<th> Destino </th>' +
+                                                 '<th> Fecha </th>' +
+                                                 '<th> Hora </th>' +
+                                                 '<th> Valor </th>' +
+                                                 '<th> Acciones </th>' +
+                                              '</tr>'+
+                                             '</thead>'+
+                                             '<tbody>'+
+                                               '<tr>'+   
+                                                '<td>'+data.numero_vale+'</td>'+
+                                                '<td>'+data.ClienteRut+'</td>'+
+                                                '<td>'+data.origen+'</td>'+
+                                                '<td>'+data.destino+'</td>'+
+                                                '<td>'+data.fecha+'</td>'+
+                                                '<td>'+data.hora+'</td>'+
+                                                '<td>$'+data.valor+'</td>'+
+                                                '<td><a href="#editEmployeeModal" class="edit" onClick="selChofer(\''+data.numero_vale+'\',\''+data.origen+'\',\''+data.destino+'\')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>'+
+                                                '<a href="#deleteEmployeeModal" class="delete" onClick="selChoferDel(\''+data.id+'\')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>'+
+                                                '</td>'+
+                                            '</tr>'+
+                                            '</tbody>'+
+                                            '</table>';
+                                document.getElementById('resultados').innerHTML = output;
+                                        
                             })
                             .fail(function( jqXHR, textStatus, errorThrown ) {
                                     if ( console && console.log ) {
@@ -40,7 +73,7 @@
                                             + " \n jqXHR.status : " + jqXHR.status );
                                     }
                             }); 
-
+                        }
             });
     });        
     </script>
