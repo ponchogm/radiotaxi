@@ -88,21 +88,16 @@ class Vale_model extends CI_Model{
      */
 	function editar($data){
 
-		$id = $data['rut'];
-		//echo $id;
+		$id = $data['cod'];
+		echo $id;
 			$data = array(
-				'ChoferRut' => $id,
-        		'ChoferNombres' => $data['nom'],
-        		'ChoferApellidoPat' => $data['pat'],
-        		'ChoferApellidoMat' => $data['mat'],
-        		'ChoferDireccion' => $data['dir'],
-        		'ChoferFono' => $data['fon'],
-        		'ChoferCelular' => $data['cel'],
-        		'ComunaCodigo' => $data['com']
+				'TalonarioInicio' => $data['ini'],
+        		'TalonarioTermino' => $data['fin'],
+        		'TalonarioEstado' => $data['est']
 			);
-		$this->db->where('ChoferRut', $id);
-		$this->db->update('chofer', $data);
-		$query = $this->db->get('chofer');
+		$this->db->where('TalonarioCodigo', $id);
+		$this->db->update('talonario', $data);
+		$query = $this->db->get('talonario');
 		if($query->num_rows() > 0){
 			return $query;
 		}else{
@@ -263,7 +258,7 @@ class Vale_model extends CI_Model{
 		}
 	}
 	/**
-     * Habilita Mes para guardar Vales
+     * Bloque Mes para guardar Vales
      */
 	function bloquearMes($data){
 			$cod = $data['meseshab'];

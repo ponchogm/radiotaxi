@@ -155,5 +155,17 @@ class ComboBoxes_Model extends CI_Model{
             $sql = ("SELECT * FROM meses WHERE estado = 1 ORDER BY MesesCodigo");
             $consulta = $this->db->query($sql);
             return $consulta->result();
-        }        
+        }
+    /**
+     * Obtiene todos los Talonarios
+     */
+        public function getTalonariosTot() {
+        $this->db->from('talonario');
+        $this->db->order_by("TalonarioCodigo", "asc");
+        $choferes = $this->db->get(); 
+        //return $query->result();
+        if($choferes->num_rows() > 0){
+            return $choferes->result();
+        }
+    }            
 }

@@ -9,7 +9,7 @@
                         <a href="<?= base_url('Cliente/registrar');?>" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Nuevo Cliente</span></a>           
                     </div>
                     <div class="col-sm-3">
-                        <form><span><input type="text" style="color: #a0a0a0;" class="form-control" name="buscar" id="buscar" placeholder="Buscar datos"></span></form>                       
+                        <form><span><input type="text" style="color: #a0a0a0;" class="form-control" name="buscar" id="buscar" placeholder="Ingrese apellido del cliente"></span></form>                       
                     </div>
                 </div>
             </div>

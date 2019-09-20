@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="row">
-                
+                <div class="col-sm-4">
                 <?php foreach ($ultimo_tal as $i) {
                                     $talonario = $i->TalonarioInicio.'-'.$i->TalonarioTermino;
                                     echo "Último Talonario ingresado: ".$talonario. "<p>";
@@ -34,41 +34,71 @@
                 <?php foreach ($tot_talCli as $i) {
                                     echo "Talonarios asignados a clientes: ".$i->total;
                                 } ?>
-            </div>
+                </div>
+           
+                <div class="col-sm-8">
+                    <table class="table table-striped table-hover">
+                     <thead>   
+                      <tr>  
+                        <th>Código</th>
+                        <th>Folio Inicio</th>
+                        <th>Folio Fin</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                      </tr>
+                     </thead>
+                     <tbody>
+                    <?php foreach($talonariosTot as $row){ ?>
+                        <tr>
+                            <td><?= $row->TalonarioCodigo;?></td>
+                            <td><?= $row->TalonarioInicio;?></td>
+                            <td><?= $row->TalonarioTermino;?></td>
+                            <td><?= $row->TalonarioEstado;?></td>
+                            <td>
+                                <a href="#editTalonarioModal" class="edit" onClick="selTalonario('<?php echo $row->TalonarioCodigo."','".$row->TalonarioInicio."','".$row->TalonarioTermino."','".$row->TalonarioEstado; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+                                <a href="#deleteTalonarioModal" class="delete" onClick="selTalonarioNull('<?php echo $row->TalonarioCodigo; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Anular">&#xE14B;</i></a>
+                            </td>
+                        </tr>
+                        <?php } ?>
+                     </tbody>   
+                    </table>
+                </div>
+                
         </div>
 </div>
 <!-- Modal de Talonario  Móvil -->
-    <div id="talonMovil" class="modal fade">
+    <div id="editTalonarioModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form name="talonMovil_form" id="talonMovil_form">
+                <form name="editTalonario_form" id="editTalonario_form">
                     <div class="modal-header">                      
-                        <h4 class="modal-title">Talonario Móvil</h4>
+                        <h4 class="modal-title">Editar Talonario</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
-                    <div class="modal-body">                    
+                    <div class="modal-body">                                       
                         <div class="form-group">
-                            <label>Móviles</label>
-                                <select id="moviles" name="moviles" class="form-control">
-                                <?php foreach ($moviles as $i) {
-                                    $numero = $i->MovilNumero;
-                                    echo '<option value="'. $i->MovilCodigo .'">'. $numero .'</option>';
-                                } ?>
-                            </select>
-                        </div>                    
-                         <div class="form-group">
-                          <label for="sel1">Talonarios Disponibles</label>
-                            <select id="talonarios" name="talonarios" class="form-control">
-                                <?php foreach ($talonarios as $i) {
-                                    $talonario = $i->TalonarioInicio .' - '. $i->TalonarioTermino;
-                                    echo '<option value="'. $i->TalonarioCodigo .','.$talonario.'">'. $talonario .'</option>';
-                                } ?>
-                            </select>
-                        </div>                 
+                            <input type="hidden" name="cod" id="cod" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Código</label>
+                            <input type="text" class="form-control" name="id" id="id" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Folio Inicio</label>
+                            <input type="text" class="form-control" name="ini" id="ini" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Folio Término</label>
+                            <input type="text" class="form-control" name="fin" id="fin" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Estado</label>
+                            <input type="text" class="form-control" name="est" id="est" required>
+                        </div>               
                     </div>
                     <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-success" id="asignarMov_btn" value="Asignar">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                        <input type="submit" class="btn btn-success" id="editarTalonario_btn" value="Editar Talonario">
                     </div>
                 </form>
             </div>
@@ -142,16 +172,13 @@
     </div>
 <!-- Fin Modal de Talonario  Móvil -->   
     <script>
-        function selChofer(rut,nom,pat,mat,dir,fon,cel,com){
-            $('#rut').val(rut);
-            $('#nom').val(nom);
-            $('#pat').val(pat);
-            $('#mat').val(mat);
-            $('#dir').val(dir);
-            $('#fon').val(fon);
-            $('#cel').val(cel);
-            $('#com').val(com);
-            console.log(com);
+        function selTalonario(cod,ini,fin,est){
+            $('#cod').val(cod);
+            $('#id').val(cod);
+            $('#ini').val(ini);
+            $('#fin').val(fin);
+            $('#est').val(est);
+            console.log(cod);
         }
         function selChoferDel(cod){
             $('#id').val(cod);
@@ -259,23 +286,23 @@
                         });
 
             //  envia los nuevos datos para actualizar
-            $("#editar_btn").click(function(e){
+            $("#editarTalonario_btn").click(function(e){
                 //alert("Hola");
                 e.preventDefault();
-                        var datax = $('#editar_form').serializeArray();
+                        var datax = $('#editTalonario_form').serializeArray();
                         $.each(datax, function(i, field){
                             console.log("contenido del form = "+ field.name + ":" + field.value + " ");
                         });
-                        console.log($('#rut').val());
+                        //console.log($('#rut').val());
                            $.ajax({
                                    data: datax,    // En data se puede utilizar un objeto JSON, un array o un query string
                                    type: "POST",   //Cambiar a type: POST si necesario
                                    dataType: "json",  // Formato de datos que se espera en la respuesta
-                                   url: "<?=base_url();?>Chofer/actualiza",  // URL a la que se enviará la solicitud Ajax
+                                   url: "<?=base_url();?>Vale/actualiza",  // URL a la que se enviará la solicitud Ajax
                             })
                            .done(function( data, textStatus, jqXHR ) {
                                 if ( console && console.log ) {
-                                    console.log(" data msg : "+ data.msg 
+                                    console.log(" data msg : "+ data.msg
                                     + " \n textStatus : " + textStatus
                                     + " \n jqXHR.status : " + jqXHR.status );
                                 }
@@ -288,8 +315,8 @@
                                             + " \n jqXHR.status : " + jqXHR.status );
                                     }
                             });                        
-                            $('#editEmployeeModal').hide();
-                             location.reload();
+                            $('#editTalonarioModal').hide();
+                            location.reload();
                         });
             //  envia los nuevos datos para actualizar
             $("#eliminar_btn").click(function(e){

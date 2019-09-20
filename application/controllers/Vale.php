@@ -33,6 +33,7 @@ class Vale extends CI_Controller {
     public function index(){
 
             $data['talonarios'] = $this->ComboBoxes->getTalonarios();
+            $data['talonariosTot'] = $this->ComboBoxes->getTalonariosTot();
             $data['clientes'] = $this->ComboBoxes->getClientes();
             $data['moviles'] = $this->ComboBoxes->getMovilDisponibleTalonario();
             $data['ultimo_tal'] = $this->ComboBoxes->getLastTal();
@@ -364,5 +365,41 @@ class Vale extends CI_Controller {
             }else{
               echo "Error de registro";
             }
-      }  
+      }
+    /**
+
+     * Actualizar Talonarios
+
+     */
+
+    public function actualiza(){
+
+        $data = array('cod' => trim($this->input->post('cod')),
+
+                      'ini' => trim($this->input->post('ini')),
+
+                      'fin' => trim($this->input->post('fin')),
+
+                      'est' => trim($this->input->post('est'))
+
+                      );
+
+        //var_dump($data);
+        
+        $actualiza = $this->ValeModel->editar($data);
+
+        if($actualiza != false){
+
+            $jsondata = array ('msg'=>'Actualizacion exitosa');
+
+        }else{
+
+            $jsondata = array ('msg'=>'Error de actualizacion');
+
+        }
+
+        header('Content-type: application/json; charset=utf-8');
+
+        echo json_encode($jsondata);
+    }  
 }     

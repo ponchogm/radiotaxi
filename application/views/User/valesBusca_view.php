@@ -39,6 +39,7 @@
                                               '<tr>' +
                                                  '<th> Vale </th>' +
                                                  '<th> Rut Cliente </th>' +
+                                                 '<th> Nombre </th>' +
                                                  '<th> Origen </th>' +
                                                  '<th> Destino </th>' +
                                                  '<th> Fecha </th>' +
@@ -51,6 +52,7 @@
                                                '<tr>'+   
                                                 '<td>'+data.numero_vale+'</td>'+
                                                 '<td>'+data.ClienteRut+'</td>'+
+                                                '<td>'+data.ClienteNombres+' '+data.ClienteApellidoPat+'</td>'+
                                                 '<td>'+data.origen+'</td>'+
                                                 '<td>'+data.destino+'</td>'+
                                                 '<td>'+data.fecha+'</td>'+
