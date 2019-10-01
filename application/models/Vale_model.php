@@ -107,9 +107,21 @@ class Vale_model extends CI_Model{
 	/**
      * Elimina un Registro en la base de datos
      */
-	function eliminar($data){
-		$this->db->where('ChoferRut', $data);
-		return $query = $this->db->delete('chofer'); // Le pongo return para que le avise al controlador que hizo o no la eliminación
+	function anular($data){
+
+		$id = $data['cod'];
+		//echo $id;
+			$data = array(
+        		'TalonarioEstado' => '0'
+			);
+		$this->db->where('TalonarioCodigo', $id);
+		$this->db->update('talonario', $data);
+		$query = $this->db->get('talonario');
+		if($query->num_rows() > 0){
+			return $query;
+		}else{
+			return FALSE;
+		}
 	}
 	/**
      * Retorna cantidad registros de una tabla en la base de datos

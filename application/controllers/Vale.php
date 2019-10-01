@@ -401,5 +401,31 @@ class Vale extends CI_Controller {
         header('Content-type: application/json; charset=utf-8');
 
         echo json_encode($jsondata);
+    }
+    /**
+
+     * Anula Talonarios
+
+     */
+
+    public function anula(){
+
+        $data = $this->input->post('idt');
+        //var_dump($data);
+
+        $anula = $this->ValeModel->anular($data);
+        
+        if($anula){
+            
+            $jsondata = array ('msg'=>'Anulacion exitosa');
+        
+        }else{
+            
+            $jsondata = array ('msg'=>'Error de Anulación');
+
+        }
+        header('Content-type: application/json; charset=utf-8');
+
+        echo json_encode($jsondata);
     }  
 }     

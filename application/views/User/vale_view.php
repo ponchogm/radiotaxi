@@ -56,7 +56,7 @@
                             <td><?= $row->TalonarioEstado;?></td>
                             <td>
                                 <a href="#editTalonarioModal" class="edit" onClick="selTalonario('<?php echo $row->TalonarioCodigo."','".$row->TalonarioInicio."','".$row->TalonarioTermino."','".$row->TalonarioEstado; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-                                <a href="#deleteTalonarioModal" class="delete" onClick="selTalonarioNull('<?php echo $row->TalonarioCodigo; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Anular">&#xE14B;</i></a>
+                                <a href="#anularTalonarioModal" class="delete" onClick="selTalonarioNull('<?php echo $row->TalonarioCodigo; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Anular">&#xE14B;</i></a>
                             </td>
                         </tr>
                         <?php } ?>
@@ -66,7 +66,7 @@
                 
         </div>
 </div>
-<!-- Modal de Talonario  Móvil -->
+<!-- Modal de Edición de Talonario  Móvil -->
     <div id="editTalonarioModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -104,8 +104,46 @@
             </div>
         </div>
     </div>
-<!-- Fin Modal de Talonario  Móvil -->
+<!-- Fin Modal de Edición de Talonario  Móvil -->
 <!-- Modal de Talonario  Móvil -->
+    <div id="talonMovil" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="talonMovil_form" id="talonMovil_form">
+                    <div class="modal-header">                      
+                        <h4 class="modal-title">Talonario Móvil</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">                    
+                        <div class="form-group">
+                            <label>Móviles</label>
+                                <select id="moviles" name="moviles" class="form-control">
+                                <?php foreach ($moviles as $i) {
+                                    $numero = $i->MovilNumero;
+                                    echo '<option value="'. $i->MovilCodigo .'">'. $numero .'</option>';
+                                } ?>
+                            </select>
+                        </div>                    
+                         <div class="form-group">
+                          <label for="sel1">Talonarios Disponibles</label>
+                            <select id="talonarios" name="talonarios" class="form-control">
+                                <?php foreach ($talonarios as $i) {
+                                    $talonario = $i->TalonarioInicio .' - '. $i->TalonarioTermino;
+                                    echo '<option value="'. $i->TalonarioCodigo .','.$talonario.'">'. $talonario .'</option>';
+                                } ?>
+                            </select>
+                        </div>                 
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-success" id="asignarMov_btn" value="Asignar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<!-- Fin Modal de Talonario  Móvil -->
+<!-- Modal de Talonario  Cliente -->
     <div id="talonCliente" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -142,8 +180,8 @@
             </div>
         </div>
     </div>
-<!-- Fin Modal de Talonario  Móvil -->
-<!-- Modal de Talonario  Móvil -->
+<!-- Fin Modal de Talonario  Cliente -->
+<!-- Modal de Talonario  Nuevo -->
     <div id="talonNuevo" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -170,7 +208,30 @@
             </div>
         </div>
     </div>
-<!-- Fin Modal de Talonario  Móvil -->   
+<!-- Fin Modal de Talonario Nuevo -->
+<!-- Anular Modal HTML -->
+    <div id="anularTalonarioModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="anular_form" id="anular_form">
+                    <div class="modal-header">                      
+                        <h4 class="modal-title">Anular Talonario</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="idt" id="idt">                  
+                        <p>¿Está seguro que desea anular este Talonario?</p>
+                        <p class="text-warning"><small><!-- Esta acción no se puede deshacer. --></small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                        <input type="submit" class="btn btn-danger" id="anular_btn" value="Anular">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<!-- Fin Anular Modal -->      
     <script>
         function selTalonario(cod,ini,fin,est){
             $('#cod').val(cod);
@@ -180,8 +241,8 @@
             $('#est').val(est);
             console.log(cod);
         }
-        function selChoferDel(cod){
-            $('#id').val(cod);
+        function selTalonarioNull(cod){
+            $('#idt').val(cod);
             //console.log(id);
         }
     $(document).ready(function(){
@@ -319,10 +380,10 @@
                             location.reload();
                         });
             //  envia los nuevos datos para actualizar
-            $("#eliminar_btn").click(function(e){
+            $("#anular_btn").click(function(e){
                 //alert("Hola");
                 e.preventDefault();
-                        var datax = $('#eliminar_form').serializeArray();
+                        var datax = $('#anular_form').serializeArray();
                         $.each(datax, function(i, field){
                             console.log("contenido del form = "+ field.name + ":" + field.value + " ");
                         });
@@ -331,7 +392,7 @@
                                    data: datax,    // En data se puede utilizar un objeto JSON, un array o un query string
                                    type: "POST",   //Cambiar a type: POST si necesario
                                    dataType: "json",  // Formato de datos que se espera en la respuesta
-                                   url: "<?=base_url();?>Chofer/elimina",  // URL a la que se enviará la solicitud Ajax
+                                   url: "<?=base_url();?>Vale/anula",  // URL a la que se enviará la solicitud Ajax
                             })
                            .done(function( data, textStatus, jqXHR ) {
                                 if ( console && console.log ) {
@@ -348,7 +409,7 @@
                                             + " \n jqXHR.status : " + jqXHR.status );
                                     }
                             });                        
-                            $('#deleteEmployeeModal').hide();
+                            $('#anularTalonarioModal').hide();
                              location.reload();
                         });
 
