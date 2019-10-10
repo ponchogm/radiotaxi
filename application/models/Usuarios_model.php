@@ -48,4 +48,15 @@ class Usuarios_model extends CI_Model {
             return ['status' => FALSE,'data' => FALSE];
         }
     }
+    /**
+     * Obtener listado de usuarios en la base de datos
+     */
+    public function obtenerUsuarios(){
+        $query = $this->db->get('usuario');
+        if($query->num_rows() > 0){
+            return $query;
+        }else{
+            return FALSE;
+        }
+    }
 }

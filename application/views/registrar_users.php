@@ -41,7 +41,7 @@
 						<span class="text-danger"><?php echo form_error('pass'); ?></span>
 					</div>
 					<div class="form-group">
-						<input type="submit" name="enviar" id="enviar" class="btn btn-info" value="Insertar nuevo usuarioen la base de datos" />
+						<input type="submit" name="enviar" id="enviar" class="btn btn-info" value="Insertar nuevo usuario en la base de datos" />
 					</div>
 				</form>
 			</div>

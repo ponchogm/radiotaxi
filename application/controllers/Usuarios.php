@@ -11,8 +11,20 @@ class Usuarios extends CI_Controller {
         parent::__construct();
 
         // $this->load->library('form_validation');
+        $this->load->model('Usuarios_model', 'UsuariosModel');
 
         $this->form_validation->set_error_delimiters('<p class="invalid-feedback">', '</p>');
+    }
+
+    public function index(){
+            $data['usuarios'] = $this->UsuariosModel->obtenerUsuarios();
+
+            $this->load->view('sis_header_private.php'); // Header File
+
+            $this->load->view("User/usuarios_view",$data);
+
+            $this->load->view('sis_footer_private.php'); // Footer File
+
     }
     /**
 
@@ -88,8 +100,6 @@ class Usuarios extends CI_Controller {
              * Load User Model
 
              */
-
-            $this->load->model('User_model', 'UserModel');
 
             $result = $this->UserModel->insert_user($insert_data);
 
