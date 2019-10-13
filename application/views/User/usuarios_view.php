@@ -31,6 +31,7 @@
                 <tbody>
                     <?php foreach($usuarios->result() as $row){ ?>
                         <?php $cod = $row->usuario_id; ?>
+                        <?php $nombre = $row->usuario_nombres." ".$row->usuario_pat." ".$row->usuario_mat; ?>
                     <tr>
                                                     <td><?= $row->usuario_nombres;?></td>
                                                     <td><?= $row->usuario_pat;?></td>
@@ -41,8 +42,8 @@
                                                     <td><?= $row->usuario_correo;?></td>
                                                     <td><?= $row->usuario_rol;?></td>
                                                     <td>
-                            <a href="#editEmployeeModal" class="edit" onClick="selUser('<?php echo $cod."','".$row->usuario_nombres."','".$row->usuario_pat."','".$row->usuario_mat."','".$row->usuario_rut."','".$row->usuario_dir."','".$row->usuario_fono."','".$row->usuario_correo; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" onClick="selUserDel('<!--<?php echo $cod; ?>'-->)" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
+                            <a href="#editEmployeeModal" class="edit" onClick="selUser('<?php echo $cod."','".$row->usuario_nombres."','".$row->usuario_pat."','".$row->usuario_mat."','".$row->usuario_rut."','".$row->usuario_dir."','".$row->usuario_fono."','".$row->usuario_correo."','".$row->usuario_pass."','".$row->usuario_rol; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+                            <a href="#deleteEmployeeModal" class="delete" onClick="selUserDel('<?php echo $cod."','".$nombre; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
                                                     </td>
                     </tr>
                     <?php } ?>
@@ -56,40 +57,44 @@
             <div class="modal-content">
                 <form name="nuevo_form" id="nuevo_form">
                     <div class="modal-header">                      
-                        <h4 class="modal-title">Nuevo Móvil</h4>
+                        <h4 class="modal-title">Nuevo Usuario</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">                    
                         <div class="form-group">
-                            <input type="hidden" class="form-control" name="tco" id="tco" value="2">
+                            <input type="hidden" class="form-control" name="rol" id="rol" value="2">
                         </div>                    
                         <div class="form-group">
-                            <label>Rut Dueño</label>
-                            <input type="text" class="form-control" name="ru" id="ru" required>
+                            <label>Nombres</label>
+                            <input type="text" class="form-control" name="nom" id="nom" required>
                         </div>
                         <div class="form-group">
-                            <label>Patente</label>
-                            <input type="text" class="form-control" name="pa" id="pa" required>
+                            <label>Apellido Paterno</label>
+                            <input type="text" class="form-control" name="pat" id="pat" required>
                         </div>
                         <div class="form-group">
-                            <label>Marca</label>
-                            <input type="text" class="form-control" name="ma" id="ma" required>
+                            <label>Apellido Materno</label>
+                            <input type="text" class="form-control" name="mat" id="mat" required>
                         </div>
                         <div class="form-group">
-                            <label>Modelo</label>
-                            <input type="text" class="form-control" name="mo" id="mo" required>
+                            <label>Rut</label>
+                            <input type="text" class="form-control" name="rut" id="rut" required>
                         </div>
                         <div class="form-group">
-                            <label>Año</label>
-                            <input type="text" class="form-control" name="an" id="an" required>
+                            <label>Dirección</label>
+                            <input type="text" class="form-control" name="dir" id="dir" required>
                         </div>
                         <div class="form-group">
-                            <label>Número Móvil</label>
-                            <input type="text" class="form-control" name="nu" id="nu" required>
+                            <label>Teléfono</label>
+                            <input type="text" class="form-control" name="tel" id="tel" required>
                         </div>
                         <div class="form-group">
-                            <label>Valor Mensual</label>
-                            <input type="text" class="form-control" name="va" id="va" required>
+                            <label>Correo</label>
+                            <input type="text" class="form-control" name="mail" id="mail" required>
+                        </div>  
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input type="text" class="form-control" name="pass" id="pass" required>
                         </div>                  
                     </div>
                     <div class="modal-footer">
@@ -106,40 +111,48 @@
             <div class="modal-content">
                 <form name="editar_form" id="editar_form">
                     <div class="modal-header">                      
-                        <h4 class="modal-title">Editar Móvil</h4>
+                        <h4 class="modal-title">Editar Usuario</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
                             <input type="hidden" class="form-control" name="cod" id="cod">
+                        </div>
+                        <div class="form-group">
+                            <label>Rol Usuario</label>
+                            <input type="text" class="form-control" name="ro" id="ro" required>
                         </div>                    
                         <div class="form-group">
-                            <label>Rut Dueño</label>
-                            <input type="text" class="form-control" name="rut" id="rut" readonly>
+                            <label>Nombres</label>
+                            <input type="text" class="form-control" name="no" id="no" required>
                         </div>
                         <div class="form-group">
-                            <label>Patente</label>
-                            <input type="text" class="form-control" name="pat" id="pat">
+                            <label>Apellido Paterno</label>
+                            <input type="text" class="form-control" name="pa" id="pa" required>
                         </div>
                         <div class="form-group">
-                            <label>Marca</label>
-                            <input type="text" class="form-control" name="mar" id="mar">
+                            <label>Apellido Materno</label>
+                            <input type="text" class="form-control" name="ma" id="ma" required>
                         </div>
                         <div class="form-group">
-                            <label>Modelo</label>
-                            <input type="text" class="form-control" name="mod" id="mod">
+                            <label>Rut</label>
+                            <input type="text" class="form-control" name="ru" id="ru" required>
                         </div>
                         <div class="form-group">
-                            <label>Año</label>
-                            <input type="text" class="form-control" name="ano" id="ano">
+                            <label>Dirección</label>
+                            <input type="text" class="form-control" name="di" id="di" required>
                         </div>
                         <div class="form-group">
-                            <label>Número Móvil</label>
-                            <input type="text" class="form-control" name="num" id="num">
+                            <label>Teléfono</label>
+                            <input type="text" class="form-control" name="te" id="te" required>
                         </div>
                         <div class="form-group">
-                            <label>Valor Mensual</label>
-                            <input type="text" class="form-control" name="val" id="val">
+                            <label>Correo</label>
+                            <input type="text" class="form-control" name="mai" id="mai" required>
+                        </div>  
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input type="text" class="form-control" name="pas" id="pas" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -156,12 +169,14 @@
             <div class="modal-content">
                 <form name="eliminar_form" id="eliminar_form">
                     <div class="modal-header">                      
-                        <h4 class="modal-title">Eliminar Registro</h4>
+                        <h4 class="modal-title">Eliminar Usuario</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="id" id="id">                  
-                        <p>¿Está seguro que desea eliminar este registro?</p>
+                        <p>¿Está seguro que desea eliminar este usuario?</p>
+                        <p>
+                        <p id="nombre"></p>
                         <p class="text-warning"><small>Esta acción no se puede deshacer.</small></p>
                     </div>
                     <div class="modal-footer">
@@ -173,43 +188,25 @@
         </div>
     </div>
     <script>
-        function selMovil(cod,rut,pat,mar,mod,ano,num,val){
+        function selUser(cod,no,pa,ma,ru,di,te,mai,pas,ro){
             $('#cod').val(cod);
-            $('#rut').val(rut);
-            $('#pat').val(pat);
-            $('#mar').val(mar);
-            $('#mod').val(mod);
-            $('#ano').val(ano);
-            $('#num').val(num);
-            $('#val').val(val);
+            $('#no').val(no);
+            $('#pa').val(pa);
+            $('#ma').val(ma);
+            $('#ru').val(ru);
+            $('#di').val(di);
+            $('#te').val(te);
+            $('#mai').val(mai);
+            $('#pas').val(pas);
+            $('#ro').val(ro);
             //console.log(id);
         }
-        function selMovilDel(cod){
+        function selUserDel(cod,nombre){
             $('#id').val(cod);
+            $('#nombre').text(nombre);
             //console.log(id);
         }
     $(document).ready(function(){
-        // Activate tooltip
-        $('[data-toggle="tooltip"]').tooltip();
-            
-            // Select/Deselect checkboxes
-            var checkbox = $('table tbody input[type="checkbox"]');
-            $("#selectAll").click(function(){
-                if(this.checked){
-                    checkbox.each(function(){
-                        this.checked = true;                        
-                    });
-                } else{
-                    checkbox.each(function(){
-                        this.checked = false;                        
-                    });
-                } 
-            });
-            checkbox.click(function(){
-                if(!this.checked){
-                    $("#selectAll").prop("checked", false);
-                }
-            });
             //  envia los nuevos datos para actualizar
             $("#nuevo_btn").click(function(e){
                 //alert("Hola");
@@ -223,7 +220,7 @@
                                    data: datax,    // En data se puede utilizar un objeto JSON, un array o un query string
                                    type: "POST",   //Cambiar a type: POST si necesario
                                    dataType: "json",  // Formato de datos que se espera en la respuesta
-                                   url: "<?=base_url();?>Movil/ingresa",  // URL a la que se enviará la solicitud Ajax
+                                   url: "<?=base_url();?>Usuarios/ingresa",  // URL a la que se enviará la solicitud Ajax
                             })
                            .done(function( data, textStatus, jqXHR ) {
                                 if ( console && console.log ) {
@@ -241,7 +238,7 @@
                                     }
                             });                        
                             $('#addEmployeeModal').hide();
-                             location.reload();
+                            location.reload();
                         });
 
             //  envia los nuevos datos para actualizar
@@ -257,7 +254,7 @@
                                    data: datax,    // En data se puede utilizar un objeto JSON, un array o un query string
                                    type: "POST",   //Cambiar a type: POST si necesario
                                    dataType: "json",  // Formato de datos que se espera en la respuesta
-                                   url: "<?=base_url();?>Movil/actualiza",  // URL a la que se enviará la solicitud Ajax
+                                   url: "<?=base_url();?>Usuarios/actualiza",  // URL a la que se enviará la solicitud Ajax
                             })
                            .done(function( data, textStatus, jqXHR ) {
                                 if ( console && console.log ) {
@@ -275,7 +272,7 @@
                                     }
                             });                        
                             $('#editEmployeeModal').hide();
-                             location.reload();
+                            location.reload();
                         });
             //  envia los nuevos datos para actualizar
             $("#eliminar_btn").click(function(e){
@@ -290,7 +287,7 @@
                                    data: datax,    // En data se puede utilizar un objeto JSON, un array o un query string
                                    type: "POST",   //Cambiar a type: POST si necesario
                                    dataType: "json",  // Formato de datos que se espera en la respuesta
-                                   url: "<?=base_url();?>Movil/elimina",  // URL a la que se enviará la solicitud Ajax
+                                   url: "<?=base_url();?>Usuarios/elimina",  // URL a la que se enviará la solicitud Ajax
                             })
                            .done(function( data, textStatus, jqXHR ) {
                                 if ( console && console.log ) {
@@ -308,7 +305,7 @@
                                     }
                             });                        
                             $('#deleteEmployeeModal').hide();
-                             location.reload();
+                            location.reload();
                         });
             //Búsqueda
             $("#buscar").keyup(function(e){
@@ -316,37 +313,33 @@
                         var text = $('#buscar').val();
                         var lt = $('#buscar').val().length;
                         if(lt >= 1){
-                              $("#movil_tb tbody").html('');
+                              $("#user_tb tbody").html('');
                                 $("#pagination").hide();
                                 //alert($("#buscar").val());
                                     console.log(text);
-                                    $.post( "<?=base_url();?>Movil/buscar", 
+                                    $.post( "<?=base_url();?>Usuarios/buscar", 
                                         { data : text }, 
                                         function(data){
                                         var obj = JSON.parse(data);
                                         var output = '';
                                         $.each(obj, function(i,item){
+                                            var nombre = item.usuario_nombres+' '+item.usuario_pat+' '+item.usuario_mat;
                                             output +=
                                             '<tr>' +
-                                                '<td>' +
-                                                    '<span class="custom-checkbox">' +
-                                                        '<input type="checkbox" id="checkbox1" name="options[]" value="1">'+
-                                                        '<label for="checkbox1"></label>'+
-                                                    '</span>'+
-                                                '</td>'+
-                                                '<td>'+item.DuenoRut+'</td>'+
-                                                '<td>'+item.MovilPatente+'</td>'+
-                                                '<td>'+item.MovilMarca+'</td>'+
-                                                '<td>'+item.MovilModelo+'</td>'+
-                                                '<td>'+item.MovilAnio+'</td>'+
-                                                '<td>'+item.MovilNumero+'</td>'+
-                                                '<td>$'+item.MovilValorMes+'</td>'+
-                                                '<td><a href="#editEmployeeModal" class="edit" onClick="selMovil(\''+item.MovilCodigo+'\',\''+item.DuenoRut+'\',\''+item.MovilPatente+'\',\''+item.MovilMarca+'\',\''+item.MovilModelo+'\',\''+item.MovilAnio+'\',\''+item.MovilNumero+'\',\''+item.MovilValorMes+'\')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>'+
-                                                '<a href="#deleteEmployeeModal" class="delete" onClick="selMovilDel(\''+item.MovilCodigo+'\')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>'+
+                                                '<td>'+item.usuario_nombres+'</td>'+
+                                                '<td>'+item.usuario_pat+'</td>'+
+                                                '<td>'+item.usuario_mat+'</td>'+
+                                                '<td>'+item.usuario_rut+'</td>'+
+                                                '<td>'+item.usuario_dir+'</td>'+
+                                                '<td>'+item.usuario_fono+'</td>'+
+                                                '<td>'+item.usuario_correo+'</td>'+
+                                                '<td>'+item.usuario_rol+'</td>'+
+                                                '<td><a href="#editEmployeeModal" class="edit" onClick="selUser(\''+item.usuario_id+'\',\''+item.usuario_nombres+'\',\''+item.usuario_pat+'\',\''+item.usuario_mat+'\',\''+item.usuario_rut+'\',\''+item.usuario_dir+'\',\''+item.usuario_fono+'\',\''+item.usuario_correo+'\',\''+item.usuario_pass+'\',\''+item.usuario_rol+'\')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>'+
+                                                '<a href="#deleteEmployeeModal" class="delete" onClick="selUserDel(\''+item.usuario_id+'\',\''+nombre+'\')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>'+
                                                 '</td>'+
                                             '</tr>';
                                         });
-                                        $("#movil_tb tbody").append(output);
+                                        $("#user_tb tbody").append(output);
                                     });          
                         }
                                 

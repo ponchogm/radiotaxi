@@ -28,6 +28,125 @@ class Usuarios extends CI_Controller {
     }
     /**
 
+     * Ingreso de nuevos usuarios
+
+    */
+    public function ingresa(){
+                $data = array(
+                          'rol' => $this->input->post('rol'),
+                          'nom' => trim($this->input->post('nom')),
+                          'pat' => trim($this->input->post('pat')),
+                          'mat' => trim($this->input->post('mat')),
+                          'rut' => trim($this->input->post('rut')),
+                          'dir' => trim($this->input->post('dir')),
+                          'tel' => trim($this->input->post('tel')),
+                          'mail' => trim($this->input->post('mail')),
+                          'pass' => trim($this->input->post('pass'))
+                        );
+
+        //var_dump($data);
+
+        $ingresa = $this->UsuariosModel->guardar($data);
+
+        if($ingresa != false){
+
+            $jsondata = array ('msg'=>'Registro exitoso');
+
+        }else{
+
+            $jsondata = array ('msg'=>'Error de registro');
+
+        }
+
+        header('Content-type: application/json; charset=utf-8');
+
+        echo json_encode($jsondata);
+    }
+    /**
+    * Editar Usuario
+    */
+    public function actualiza(){
+
+        $data = array(
+                          'cod' => $this->input->post('cod'),
+                          'ro' => $this->input->post('ro'),
+                          'no' => trim($this->input->post('no')),
+                          'pa' => trim($this->input->post('pa')),
+                          'ma' => trim($this->input->post('ma')),
+                          'ru' => trim($this->input->post('ru')),
+                          'di' => trim($this->input->post('di')),
+                          'te' => trim($this->input->post('te')),
+                          'mai' => trim($this->input->post('mai')),
+                          'pas' => trim($this->input->post('pas'))
+                        );
+
+        //var_dump($data);
+
+        $actualiza = $this->UsuariosModel->editar($data);
+
+        if($actualiza != false){
+
+            $jsondata = array ('msg'=>'Actualizacion exitosa');
+
+        }else{
+
+            $jsondata = array ('msg'=>'Error de actualizacion');
+
+        }
+
+        header('Content-type: application/json; charset=utf-8');
+
+        echo json_encode($jsondata);
+
+    }
+    /**
+
+     * Eliminar Usuarios
+
+     */
+
+    public function elimina(){
+
+        $data = $this->input->post('id');
+
+        //var_dump($data);
+
+        $elimina = $this->UsuariosModel->eliminar($data);
+
+        if($elimina){
+
+            $jsondata = array ('msg'=>'Eliminacion exitosa');
+
+        }else{
+
+            $jsondata = array ('msg'=>'Error de Eliminacion');
+
+        }
+
+        header('Content-type: application/json; charset=utf-8');
+
+        echo json_encode($jsondata);
+
+    }
+    /**
+
+     * Buscador
+
+     */
+
+    public function buscar(){
+
+        $data = $this->input->post('data');
+
+        //var_dump($data);// si era por el vardump qu no funcionaba e mensaje
+
+        $resultado = $this->UsuariosModel->buscar($data);
+
+        echo json_encode($resultado);
+
+    }
+    /**
+
      * User Registration
 
      */
