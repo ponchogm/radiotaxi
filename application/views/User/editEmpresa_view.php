@@ -4,6 +4,13 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <h2>Editar datos <b>Empresa</b></h2>
+                        <?php
+                        $rol = $this->session->userdata('USER_ROL');
+                        $nombre = $this->session->userdata('USERNAME');
+                        $apellido = $this->session->userdata('USER_AP');
+
+                        echo 'Usuario: '.$nombre." ".$apellido;
+                        ?>
                     </div>
                 </div>
             </div>

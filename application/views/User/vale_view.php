@@ -4,6 +4,13 @@
                <div class="row">
                     <div class="col-sm-4">
                         <h2>Administar <b>Talonarios de Vales</b></h2>
+                        <?php
+                        $rol = $this->session->userdata('USER_ROL');
+                        $nombre = $this->session->userdata('USERNAME');
+                        $apellido = $this->session->userdata('USER_AP');
+
+                        echo 'Usuario: '.$nombre." ".$apellido;
+                        ?>
                     </div>
                     <div class="col-sm-6">
                         <a href="#talonMovil" data-toggle="modal" class="btn btn-warning"><i class="material-icons">&#xE147;</i> <span>Talonario Móvil</span></a>

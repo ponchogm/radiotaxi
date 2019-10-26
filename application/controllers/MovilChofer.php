@@ -97,13 +97,19 @@ class MovilChofer extends CI_Controller {
             $data['choferdisp'] = $this->ComboBoxes->getChoferDisponible();
 
             //$data['moviles'] = $this->MovilModel->ver_todo();// funcion que se reemplazó por la de paginacion.
+             if (!$this->session->userdata('USER_NAME')) {
+              redirect('Usuarios/logout', 'refresh');
+            }else{
+                    if($this->session->userdata('USER_ROL') == '1'){
+                    $this->load->view('sis_header_private.php'); // Header File
+                    }else{
+                        $this->load->view('sis_header_private2.php');
+                    }
 
-            $this->load->view('sis_header_private.php'); // Header File
+                    $this->load->view('User/movilchofer_view', $data);
 
-            $this->load->view('User/movilchofer_view', $data);
-
-            $this->load->view('sis_footer_private.php'); // Footer File
-
+                    $this->load->view('sis_footer_private.php'); // Footer File
+                }
     }
 
     /**
@@ -116,13 +122,20 @@ class MovilChofer extends CI_Controller {
     		$data['ver'] = $this->MovilChoferModel->ver_todo();
     		  
         //echo json_encode($jsondata);
+            if (!$this->session->userdata('USER_NAME')) {
+              redirect('Usuarios/logout', 'refresh');
+            }else{  
 
+            if($this->session->userdata('USER_ROL') == '1'){
             $this->load->view('sis_header_private.php'); // Header File
+            }else{
+                $this->load->view('sis_header_private2.php');
+            }
 
             $this->load->view("User/movilchofer_view");
 
             $this->load->view('sis_footer_private.php'); // Footer File
-
+        }
     }
 
     /**

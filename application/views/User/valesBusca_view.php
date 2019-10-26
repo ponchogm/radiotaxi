@@ -4,6 +4,13 @@
                <div class="row">
                     <div class="col-sm-4">
                         <h2>Buscar <b>Vales</b></h2>
+                        <?php
+                        $rol = $this->session->userdata('USER_ROL');
+                        $nombre = $this->session->userdata('USERNAME');
+                        $apellido = $this->session->userdata('USER_AP');
+
+                        echo 'Usuario: '.$nombre." ".$apellido;
+                        ?>
                     </div>
                     <div class="col-sm-8">
                         <form method="POST"><span><input type="text" style="color: #a0a0a0;" class="form-control" name="buscar" id="buscar" placeholder="Ingrese número de vale a buscar"></span></form>                                

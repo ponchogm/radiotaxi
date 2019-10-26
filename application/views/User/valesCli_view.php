@@ -4,10 +4,19 @@
                <div class="row">
                     <div class="col-sm-4">
                         <h2>Administar <b>Vales</b> Clientes</h2>
+                        <?php
+                        $rol = $this->session->userdata('USER_ROL');
+                        $nombre = $this->session->userdata('USERNAME');
+                        $apellido = $this->session->userdata('USER_AP');
+
+                        echo 'Usuario: '.$nombre." ".$apellido;
+                        ?>
                     </div>
                     <div class="col-sm-8">
+                        <?php if ($rol == '1') : ?>
                         <a href="#bloquearMes" data-toggle="modal" class="btn btn-danger"><i class="material-icons">&#xE147;</i> <span>Bloquear Mes</span></a>
                         <a href="#habilitaMes" data-toggle="modal"class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Habilitar Mes</span></a>
+                        <?php endif; ?>
                         <!-- <a href="#talonNuevo" data-toggle="modal" class="btn btn-primary"><i class="material-icons">&#xE147;</i> <span>Ingreso Talonario</span></a> -->           
                     </div>
                 </div>

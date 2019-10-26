@@ -17,6 +17,9 @@ class Usuarios extends CI_Controller {
     }
 
     public function index(){
+        if (!$this->session->userdata('USER_NAME')) {
+              redirect('Usuarios/logout', 'refresh');
+            }else{  
             $data['usuarios'] = $this->UsuariosModel->obtenerUsuarios();
 
             $this->load->view('sis_header_private.php'); // Header File
@@ -24,7 +27,7 @@ class Usuarios extends CI_Controller {
             $this->load->view("User/usuarios_view",$data);
 
             $this->load->view('sis_footer_private.php'); // Footer File
-
+        }
     }
     /**
 
@@ -353,9 +356,10 @@ class Usuarios extends CI_Controller {
 
          */
 
-        $remove_sessions = array('USER_ID', 'USER_NAME', 'USERNAME','USER_AP','USER_ROL');
+        //$remove_sessions = array('USER_ID', 'USER_NAME', 'USERNAME','USER_AP','USER_ROL');
 
-        $this->session->unset_userdata($remove_sessions);
+        //$this->session->unset_userdata($remove_sessions);
+        $this->session->sess_destroy();
 
         redirect('Usuarios/login');
         //redirect('http://www.yahoo.com', 'refresh');
@@ -373,9 +377,11 @@ class Usuarios extends CI_Controller {
 
             redirect('Usuarios/login');
         }
-
-        $this->load->view('sis_header_private.php'); // Header File
-
+        if($this->session->userdata('USER_ROL') == '1'){
+            $this->load->view('sis_header_private.php'); // Header File
+            }else{
+                $this->load->view('sis_header_private2.php');
+            }
         $this->load->view("User/panel");
 
         $this->load->view('sis_footer_private.php'); // Footer File

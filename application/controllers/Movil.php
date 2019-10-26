@@ -97,13 +97,20 @@ class Movil extends CI_Controller {
             $data['total_reg'] = $this->MovilModel->num_movil();
 
             //$data['moviles'] = $this->MovilModel->ver_todo();// funcion que se reemplazó por la de paginacion.
+             if (!$this->session->userdata('USER_NAME')) {
+              redirect('Usuarios/logout', 'refresh');
+            }else{
 
-            $this->load->view('sis_header_private.php'); // Header File
+                    if($this->session->userdata('USER_ROL') == '1'){
+                    $this->load->view('sis_header_private.php'); // Header File
+                    }else{
+                        $this->load->view('sis_header_private2.php');
+                    }
 
-            $this->load->view('User/movil_view', $data);
+                    $this->load->view('User/movil_view', $data);
 
-            $this->load->view('sis_footer_private.php'); // Footer File
-
+                    $this->load->view('sis_footer_private.php'); // Footer File
+                }
     }
 
     /**
@@ -114,14 +121,20 @@ class Movil extends CI_Controller {
 
     public function index(){
 
+if (!$this->session->userdata('USER_NAME')) {
+              redirect('Usuarios/logout', 'refresh');
+            }else{  
 
-
+            if($this->session->userdata('USER_ROL') == '1'){
             $this->load->view('sis_header_private.php'); // Header File
+            }else{
+                $this->load->view('sis_header_private2.php');
+            }
 
             $this->load->view("User/movil_view");
 
             $this->load->view('sis_footer_private.php'); // Footer File
-
+        }
     }
 
     /**

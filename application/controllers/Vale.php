@@ -10,9 +10,8 @@ class Vale extends CI_Controller {
         parent::__construct();
 
         // $this->load->library('form_validation');
-
         // load Session Library
-        //$this->load->library('session');
+        $this->load->library('session');
 
         $this->load->model('Vale_model', 'ValeModel');
 
@@ -44,12 +43,20 @@ class Vale extends CI_Controller {
             $tt = array('tot' => $tot);
             $data['page_title'] = $this->ComboBoxes->getTotTal();
 
+            if (!$this->session->userdata('USER_NAME')) {
+              redirect('Usuarios/logout', 'refresh');
+            }else{    
+
+                if($this->session->userdata('USER_ROL') == '1'){
             $this->load->view('sis_header_private.php'); // Header File
+            }else{
+                $this->load->view('sis_header_private2.php');
+            }
 
-            $this->load->view("User/vale_view", $data);
+                $this->load->view("User/vale_view", $data);
 
-            $this->load->view('sis_footer_private.php'); // Footer File
-
+                $this->load->view('sis_footer_private.php'); // Footer File
+            }
     }
 
     /**
@@ -177,13 +184,19 @@ class Vale extends CI_Controller {
             $tt = array('tot' => $tot);
             $data['page_title'] = $this->ComboBoxes->getTotTal();
             $data['movilTalonario'] = $this->ComboBoxes->getMovilTalonario();
+           if (!$this->session->userdata('USER_NAME')) {
+              redirect('Usuarios/logout', 'refresh');
+            }else{
+                if($this->session->userdata('USER_ROL') == '1'){
+                $this->load->view('sis_header_private.php'); // Header File
+                }else{
+                    $this->load->view('sis_header_private2.php');
+                }
 
-            $this->load->view('sis_header_private.php'); // Header File
+                $this->load->view("User/vales_view", $data);
 
-            $this->load->view("User/vales_view", $data);
-
-            $this->load->view('sis_footer_private.php'); // Footer File
-
+                $this->load->view('sis_footer_private.php'); // Footer File
+              }
     }
     /**
 
@@ -208,24 +221,37 @@ class Vale extends CI_Controller {
             $data['page_title'] = $this->ComboBoxes->getTotTal();
             $data['movilTalonario'] = $this->ComboBoxes->getMovilTalonario();
             $data['clienteTalonario'] = $this->ComboBoxes->getClienteTalonario();
+             if (!$this->session->userdata('USER_NAME')) {
+              redirect('Usuarios/logout', 'refresh');
+            }else{
+                if($this->session->userdata('USER_ROL') == '1'){
+                $this->load->view('sis_header_private.php'); // Header File
+                }else{
+                    $this->load->view('sis_header_private2.php');
+                }
 
-            $this->load->view('sis_header_private.php'); // Header File
+                $this->load->view("User/valesCli_view", $data);
 
-            $this->load->view("User/valesCli_view", $data);
-
-            $this->load->view('sis_footer_private.php'); // Footer File
-
+                $this->load->view('sis_footer_private.php'); // Footer File
+              }
     }
     /**
     * Pagina de busqueda de Vales
     **/
     public function busqueda(){
-
+ if (!$this->session->userdata('USER_NAME')) {
+              redirect('Usuarios/logout', 'refresh');
+            }else{
+           if($this->session->userdata('USER_ROL') == '1'){
             $this->load->view('sis_header_private.php'); // Header File
+            }else{
+                $this->load->view('sis_header_private2.php');
+            }
 
             $this->load->view("User/valesBusca_view");
 
             $this->load->view('sis_footer_private.php'); // Footer File
+        }
     }
     /**
 

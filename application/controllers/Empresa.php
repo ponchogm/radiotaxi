@@ -90,7 +90,11 @@ class Empresa extends CI_Controller {
 
             //$data['moviles'] = $this->MovilModel->ver_todo();// funcion que se reemplazó por la de paginacion.
 
+            if($this->session->userdata('USER_ROL') == '1'){
             $this->load->view('sis_header_private.php'); // Header File
+            }else{
+                $this->load->view('sis_header_private2.php');
+            }
 
             $this->load->view('User/empresa_view', $data);
 
@@ -105,15 +109,25 @@ class Empresa extends CI_Controller {
      */
 
     public function index(){
+      if (!$this->session->userdata('USER_NAME')) {
+              redirect('Usuarios/logout', 'refresh');
+            }else{  
 
+            if($this->session->userdata('USER_ROL') == '1'){
             $this->load->view('sis_header_private.php'); // Header File
+            }else{
+                $this->load->view('sis_header_private2.php');
+            }
 
             $this->load->view("User/empresa_view");
 
             $this->load->view('sis_footer_private.php'); // Footer File
-
+          }
     }
      public function registrar(){
+       if (!$this->session->userdata('USER_NAME')) {
+              redirect('Usuarios/logout', 'refresh');
+            }else{
 
             $data['comunas'] = $this->ComboBoxes->getComunas();
 
@@ -122,7 +136,7 @@ class Empresa extends CI_Controller {
             $this->load->view("User/regEmpresa_view", $data);
 
             $this->load->view('sis_footer_private.php'); // Footer File
-
+          }
     }
 
     /**
@@ -274,10 +288,17 @@ class Empresa extends CI_Controller {
 
         $data['comunas'] = $this->ComboBoxes->getComunas();
         $data['empresa'] = $this->EmpresaModel->obtenerEmpresa($cod);
-        $this->load->view('sis_header_private.php'); // Header File
-        $this->load->view("User/editEmpresa_view", $data);
-        $this->load->view('sis_footer_private.php'); // Footer File
-        //return $data;
+         if (!$this->session->userdata('USER_NAME')) {
+              redirect('Usuarios/logout', 'refresh');
+            }else{
+            if($this->session->userdata('USER_ROL') == '1'){
+                $this->load->view('sis_header_private.php'); // Header File
+                }else{
+                    $this->load->view('sis_header_private2.php');
+                }
+            $this->load->view("User/editEmpresa_view", $data);
+            $this->load->view('sis_footer_private.php'); // Footer File
+            //return $data;
     }
-
+  }
 }

@@ -98,13 +98,19 @@ class Chofer extends CI_Controller {
             $data['comunas'] = $this->ComboBoxes->getComunas();
 
             //$data['moviles'] = $this->MovilModel->ver_todo();// funcion que se reemplazó por la de paginacion.
+             if (!$this->session->userdata('USER_NAME')) {
+              redirect('Usuarios/logout', 'refresh');
+            }else{
+                if($this->session->userdata('USER_ROL') == '1'){
+                $this->load->view('sis_header_private.php'); // Header File
+                }else{
+                    $this->load->view('sis_header_private2.php');
+                }
 
-            $this->load->view('sis_header_private.php'); // Header File
+                $this->load->view('User/chofer_view', $data);
 
-            $this->load->view('User/chofer_view', $data);
-
-            $this->load->view('sis_footer_private.php'); // Footer File
-
+                $this->load->view('sis_footer_private.php'); // Footer File
+            }
     }
 
     /**
@@ -114,13 +120,24 @@ class Chofer extends CI_Controller {
      */
 
     public function index(){
+     if (!$this->session->userdata('USER_NAME')) {
+              redirect('Usuarios/logout', 'refresh');
+            }else{
+        if (!$this->session->userdata('USER_NAME')) {
+              redirect('Usuarios/logout', 'refresh');
+            }else{  
 
+            if($this->session->userdata('USER_ROL') == '1'){
             $this->load->view('sis_header_private.php'); // Header File
+            }else{
+                $this->load->view('sis_header_private2.php');
+            }
 
             $this->load->view("User/chofer_view");
 
             $this->load->view('sis_footer_private.php'); // Footer File
-
+        }
+       } 
     }
 
     /**

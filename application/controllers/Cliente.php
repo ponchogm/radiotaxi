@@ -89,13 +89,19 @@ class Cliente extends CI_Controller {
             $data['comunas'] = $this->ComboBoxes->getComunas();
 
             //$data['moviles'] = $this->MovilModel->ver_todo();// funcion que se reemplazó por la de paginacion.
+           if (!$this->session->userdata('USER_NAME')) {
+              redirect('Usuarios/logout', 'refresh');
+            }else{
+              if($this->session->userdata('USER_ROL') == '1'){
+              $this->load->view('sis_header_private.php'); // Header File
+              }else{
+                  $this->load->view('sis_header_private2.php');
+              }
 
-            $this->load->view('sis_header_private.php'); // Header File
+              $this->load->view('User/cliente_view', $data);
 
-            $this->load->view('User/cliente_view', $data);
-
-            $this->load->view('sis_footer_private.php'); // Footer File
-
+              $this->load->view('sis_footer_private.php'); // Footer File
+            }
     }
 
     /**
@@ -105,19 +111,30 @@ class Cliente extends CI_Controller {
      */
 
     public function index(){
+      if (!$this->session->userdata('USER_NAME')) {
+              redirect('Usuarios/logout', 'refresh');
+            }else{  
 
+            if($this->session->userdata('USER_ROL') == '1'){
             $this->load->view('sis_header_private.php'); // Header File
+            }else{
+                $this->load->view('sis_header_private2.php');
+            }
 
             $this->load->view("User/cliente_view");
 
             $this->load->view('sis_footer_private.php'); // Footer File
-
+          }
     }
      public function registrar(){
 
             $data['comunas'] = $this->ComboBoxes->getComunas();
 
+            if($this->session->userdata('USER_ROL') == '1'){
             $this->load->view('sis_header_private.php'); // Header File
+            }else{
+                $this->load->view('sis_header_private2.php');
+            }
 
             $this->load->view("User/regCliente_view", $data);
 
@@ -280,10 +297,18 @@ class Cliente extends CI_Controller {
 
         $data['comunas'] = $this->ComboBoxes->getComunas();
         $data['cliente'] = $this->ClienteModel->obtenerCliente($cod);
-        $this->load->view('sis_header_private.php'); // Header File
-        $this->load->view("User/editCliente_view", $data);
-        $this->load->view('sis_footer_private.php'); // Footer File
-        //return $data;
+     if (!$this->session->userdata('USER_NAME')) {
+              redirect('Usuarios/logout', 'refresh');
+            }else{
+               if($this->session->userdata('USER_ROL') == '1'){
+                    $this->load->view('sis_header_private.php'); // Header File
+                    }else{
+                        $this->load->view('sis_header_private2.php');
+                    }
+                $this->load->view("User/editCliente_view", $data);
+                $this->load->view('sis_footer_private.php'); // Footer File
+                //return $data;
     }
+   } 
 
 }     

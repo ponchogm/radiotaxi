@@ -4,6 +4,13 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <h2>Administar <b>Empresas</b></h2>
+                        <?php
+                        $rol = $this->session->userdata('USER_ROL');
+                        $nombre = $this->session->userdata('USERNAME');
+                        $apellido = $this->session->userdata('USER_AP');
+
+                        echo 'Usuario: '.$nombre." ".$apellido;
+                        ?>
                     </div>
                     <div class="col-sm-3">
                         <a href="<?= base_url('Empresa/registrar');?>" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Nueva Empresa</span></a>           
