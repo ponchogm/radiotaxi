@@ -239,6 +239,7 @@ class Vale extends CI_Controller {
     * Pagina de busqueda de Vales
     **/
     public function busqueda(){
+      $data['vales'] = $this->ComboBoxes->getValesCli();
  if (!$this->session->userdata('USER_NAME')) {
               redirect('Usuarios/logout', 'refresh');
             }else{
@@ -247,8 +248,8 @@ class Vale extends CI_Controller {
             }else{
                 $this->load->view('sis_header_private2.php');
             }
-
-            $this->load->view("User/valesBusca_view");
+            
+            $this->load->view("User/valesBusca_view", $data);
 
             $this->load->view('sis_footer_private.php'); // Footer File
         }

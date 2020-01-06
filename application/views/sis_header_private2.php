@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </div>
                   <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                      <li class="active"><a href="#">Inicio</a></li>
+                      <li class="active"><a href="<?= base_url('Usuarios/panel');?>">Inicio</a></li>
           
                       <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Documentos <span class="caret"></span></a>

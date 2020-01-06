@@ -100,7 +100,7 @@ class ComboBoxes_Model extends CI_Model{
      * Obtiene los Clientes
      */
         public function getClientes() {
-        $sql = ("SELECT cliente.ClienteCodigo, cliente.ClienteRut, cliente.ClienteNombres, cliente.ClienteApellidoPat, cliente.ClienteApellidoMat FROM cliente ORDER BY ClienteRut");
+        $sql = ("SELECT cliente.ClienteCodigo, cliente.ClienteRut, cliente.ClienteNombres, cliente.ClienteApellidoPat, cliente.ClienteApellidoMat FROM cliente ORDER BY ClienteCodigo");
             $consulta = $this->db->query($sql);
             return $consulta->result();
         }
@@ -167,5 +167,17 @@ class ComboBoxes_Model extends CI_Model{
         if($choferes->num_rows() > 0){
             return $choferes->result();
         }
-    }            
+    }
+    /**
+     * Obtiene todos los Vales de los moviles
+     */
+        public function getValesCli() {
+        $sql = ("SELECT * FROM comuna, cliente, vales_movil WHERE vales_movil.id_cliente = cliente.ClienteCodigo AND comuna.ComunaCodigo = cliente.ComunaCodigo ORDER BY vales_movil.numero_vale");
+        $consulta = $this->db->query($sql);
+        if($consulta->num_rows() > 0){
+            return $consulta->result();
+        }else{
+                return FALSE;
+            }
+    }                 
 }

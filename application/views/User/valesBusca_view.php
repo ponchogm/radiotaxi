@@ -30,23 +30,26 @@
                                                  <th> Fecha </th> 
                                                  <th> Hora </th> 
                                                  <th> Valor </th> 
-                                                 <th> Acciones </th> 
+                                                 <!-- <th> Acciones </th>  -->
                                               </tr>
                                              </thead>
                                              <tbody>
-                                               <tr>   
-                                                <td>data.numero_vale</td>
-                                                <td>data.ClienteRut</td>
-                                                <td>data.ClienteNombres data.ClienteApellidoPat</td>
-                                                <td>data.origen</td>
-                                                <td>data.destino</td>
-                                                <td>data.fecha</td>
-                                                <td>data.hora</td>
-                                                <td>$data.valor</td>
-                                                <td><a href="#editEmployeeModal" class="edit" onClick="selChofer(\data.numero_vale\,\data.origen\,\data.destino\)" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+                                               <tr>
+                                                <?php foreach($vales as $row){ ?>
+                                                <?php $nombre = $row->ClienteNombres." ".$row->ClienteApellidoPat; ?>   
+                                                <td><?= $row->numero_vale;?></td>
+                                                <td><?= $row->ClienteRut;?></td>
+                                                <td><?= $nombre;?></td>
+                                                <td><?= $row->origen;?></td>
+                                                <td><?= $row->destino;?></td>
+                                                <td><?= $row->fecha;?></td>
+                                                <td><?= $row->hora;?></td>
+                                                <td>$<?= $row->valor;?></td>
+                                                <!-- <td><a href="#editEmployeeModal" class="edit" onClick="selChofer(\data.numero_vale\,\data.origen\,\data.destino\)" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
                                                 <a href="#deleteEmployeeModal" class="delete" onClick="selChoferDel(\data.id\)" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
-                                                </td>
+                                                </td> -->
                                             </tr>
+                                             <?php } ?>
                                             </tbody>
                                             </table>
             </div>
