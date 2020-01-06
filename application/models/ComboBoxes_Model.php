@@ -44,7 +44,7 @@ class ComboBoxes_Model extends CI_Model{
      * Obtiene los móviles que no están asignados a ningún chofer
      */
         public function getMovilDisponible(){
-            $sql = ("SELECT movil.MovilCodigo, movil.MovilPatente FROM movil WHERE MovilCodigo Not In (SELECT MovilCodigo from movilchofer)");
+            $sql = ("SELECT movil.MovilCodigo, movil.MovilPatente, movil.MovilNumero FROM movil WHERE MovilCodigo Not In (SELECT MovilCodigo from movilchofer)");
             $consulta = $this->db->query($sql);
             return $consulta->result();
         }

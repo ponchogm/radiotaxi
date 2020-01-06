@@ -6,17 +6,14 @@
     <div class="jumbotron">
     	<br>
     	<br>
-        <h1 class="display-6">Bienvenido <?= $this->session->userdata('USERNAME') ?></h1>
-        <p>CodeIgnier 3 login and registration full application.</p>
+        <h1 class="display-6">Bienvenido: <?= $this->session->userdata('USERNAME')." ".$this->session->userdata('USER_AP') ?></h1>
+        <p>Sistema de Administración de Radio Taxi el Molino</p>
         <hr class="my-4">
         <p>
-        	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo doloribus ducimus, vel a aut quod ipsa, voluptas debitis cum quis quam numquam. Tempora ea, totam, quibusdam velit iste consequuntur aliquid.
+        	Este sistema está diseñado para poder administrar los moviles, conductores, vales, talonarios y clientes.
         </p>
         <p>
-        	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo doloribus ducimus, vel a aut quod ipsa, voluptas debitis cum quis quam numquam. Tempora ea, totam, quibusdam velit iste consequuntur aliquid.
+        	Si usted es un conductor podrá ingresar todos sus vales, y si tiene alguna o consulta puede consultar con el administrador.
         </p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Source Code</a>
-        <a class="btn btn-danger btn-lg" href="#" role="button">Video Tutorials</a>
-        <a href="<?= base_url('Usuarios/logout') ?>" class="btn btn-danger btn-lg">Logout</a>
     </div>
 </div>

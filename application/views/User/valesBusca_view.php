@@ -17,7 +17,39 @@
                     </div>
                 </div>
             </div>
-            <div id="resultados"></div>
+            <div id="resultados">
+                <span><h5>Resultados de la búsqueda</h5></span>
+                                            <table class="table table-striped table-hover">
+                                             <thead>
+                                              <tr>
+                                                 <th> Vale </th> 
+                                                 <th> Rut Cliente </th> 
+                                                 <th> Nombre </th> 
+                                                 <th> Origen </th> 
+                                                 <th> Destino </th> 
+                                                 <th> Fecha </th> 
+                                                 <th> Hora </th> 
+                                                 <th> Valor </th> 
+                                                 <th> Acciones </th> 
+                                              </tr>
+                                             </thead>
+                                             <tbody>
+                                               <tr>   
+                                                <td>data.numero_vale</td>
+                                                <td>data.ClienteRut</td>
+                                                <td>data.ClienteNombres data.ClienteApellidoPat</td>
+                                                <td>data.origen</td>
+                                                <td>data.destino</td>
+                                                <td>data.fecha</td>
+                                                <td>data.hora</td>
+                                                <td>$data.valor</td>
+                                                <td><a href="#editEmployeeModal" class="edit" onClick="selChofer(\data.numero_vale\,\data.origen\,\data.destino\)" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+                                                <a href="#deleteEmployeeModal" class="delete" onClick="selChoferDel(\data.id\)" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                            </table>
+            </div>
         </div>    
 </div>
     <script>

@@ -90,7 +90,7 @@
                           <label for="sel1">Seleccione Móvil</label>
                           <select id="mov" name="mov" class="form-control">
                                 <?php foreach ($movildisp as $i) {
-                                    echo '<option value="'. $i->MovilCodigo .'">'. $i->MovilPatente .'</option>';
+                                    echo '<option value="'. $i->MovilCodigo .'">'. $i->MovilNumero .'</option>';
                                 } ?>
                             </select>
                         </div>                
