@@ -50,7 +50,7 @@
                         <td><?= $row->ClienteNumero;?></td>
                         <td>
                             <a href="<?=base_url("Cliente/obtenerCliente/$cod");?>" class="edit"><i class="material-icons" title="Editar">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" onClick="selClienteDel('<?php echo $cod; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
+                            <a href="#deleteEmployeeModal" class="delete" onClick="selClienteDel('<?php echo $cod; ?>'); chupalo('ancla');" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
                         </td>
                     </tr>
                     <?php } ?>

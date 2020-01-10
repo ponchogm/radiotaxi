@@ -39,7 +39,7 @@ class Chofer extends CI_Controller {
 
             $config['total_rows'] = $this->ChoferModel->num_chofer();
 
-            $config['per_page'] = 10;
+            $config['per_page'] = 20;
 
             $config['uri_segment'] = 3;
 

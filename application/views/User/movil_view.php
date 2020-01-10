@@ -64,15 +64,15 @@
                         <td><?= $row->MovilNumero;?></td>
                         <td>$<?= $valor2;?></td>
                         <td>
-                            <a href="#editEmployeeModal" class="edit" onClick="selMovil('<?php echo $cod."','".$row->DuenoRut."','".$row->MovilPatente."','".$row->MovilMarca."','".$row->MovilModelo."','".$row->MovilAnio."','".$row->MovilNumero."','".$row->MovilValorMes; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" onClick="selMovilDel('<?php echo $cod; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
+                            <a href="#editEmployeeModal" class="edit" onClick="selMovil('<?php echo $cod."','".$row->DuenoRut."','".$row->MovilPatente."','".$row->MovilMarca."','".$row->MovilModelo."','".$row->MovilAnio."','".$row->MovilNumero."','".$row->MovilValorMes; ?>'); chupalo('ancla');" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+                            <a href="#deleteEmployeeModal" class="delete" onClick="selMovilDel('<?php echo $cod; ?>'); chupalo('ancla');" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
                         </td>
                     </tr>
                     <?php } ?>
                 </tbody>
             </table>
             <div class="clearfix" id="pagination">
-                <div class="hint-text">Mostrando <b>10</b> de <b><?php echo $total_reg; ?></b> registros</div>
+                <div class="hint-text">Mostrando <b>20</b> de <b><?php echo $total_reg; ?></b> registros</div>
                     <?php echo $pagination; ?>
             </div>
         </div>

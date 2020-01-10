@@ -30,7 +30,7 @@ class Empresa extends CI_Controller {
 
             $config['total_rows'] = $this->EmpresaModel->num_empresa();
 
-            $config['per_page'] = 10;
+            $config['per_page'] = 20;
 
             $config['uri_segment'] = 3;
 

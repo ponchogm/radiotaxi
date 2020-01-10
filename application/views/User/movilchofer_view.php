@@ -51,19 +51,19 @@
                             </span>
                         </td>
                         <td><?= $nombre;?></td>
-                        <td style="text-align: center;"><?= $row->MovilCodigo;?></td>
+                        <td style="text-align: center;"><?= $row->MovilNumero;?></td>
                         <td><?= $row->MovilPatente;?></td>
                         <td><?= $marcamodelo;?></td>                        
                         <td>
-                            <a href="#editEmployeeModal" class="edit" onClick="selMovilChofer('<?php echo $cod."','".$row->ChoferRut; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" onClick="selMovilChoferDel('<?php echo $cod; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
+                            <a href="#editEmployeeModal" class="edit" onClick="selMovilChofer('<?php echo $cod."','".$row->ChoferRut; ?>'); chupalo('ancla');" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+                            <a href="#deleteEmployeeModal" class="delete" onClick="selMovilChoferDel('<?php echo $cod; ?>'); chupalo('ancla');" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
                         </td>
                     </tr>
                     <?php } ?>
                 </tbody>
             </table>
             <div class="clearfix" id="pagination">
-                <div class="hint-text">Mostrando <b>10</b> de <b><?php echo $total_reg; ?></b> registros</div>
+                <div class="hint-text">Mostrando <b><?php echo $total_reg; ?></b> de <b><?php echo $total_reg; ?></b> registros</div>
                     <?php echo $pagination; ?>
             </div>
         </div>
@@ -114,7 +114,7 @@
                     </div>
                     <div class="modal-body">
                        <div class="form-group">
-                          <label for="sel1">Comuna</label>
+                          <label for="sel1">Chofer</label>
                           <select id="ch" name="ch" class="form-control">
                                 <?php foreach ($choferes as $i) {
                                     echo '<option value="'. $i->ChoferRut .'">'. $i->ChoferNombres." ".$i->ChoferApellidoPat .'</option>';
@@ -122,10 +122,10 @@
                             </select>
                         </div>
                         <div class="form-group">
-                          <label for="sel1">Comuna</label>
+                          <label for="sel1">Móvil</label>
                           <select id="mo" name="mo" class="form-control">
                                 <?php foreach ($moviles as $i) {
-                                    echo '<option value="'. $i->MovilCodigo .'">'. $i->MovilPatente .'</option>';
+                                    echo '<option value="'. $i->MovilCodigo .'">'. $i->MovilNumero .'</option>';
                                 } ?>
                             </select>
                         </div> 

@@ -18,7 +18,6 @@
                 </div>
             </div>
             <div id="resultados">
-                <span><h5>Resultados de la búsqueda</h5></span>
                                             <table class="table table-striped table-hover">
                                              <thead>
                                               <tr>

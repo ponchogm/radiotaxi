@@ -62,8 +62,8 @@
                             <td><?= $row->TalonarioTermino;?></td>
                             <td><?= $row->TalonarioEstado;?></td>
                             <td>
-                                <a href="#editTalonarioModal" class="edit" onClick="selTalonario('<?php echo $row->TalonarioCodigo."','".$row->TalonarioInicio."','".$row->TalonarioTermino."','".$row->TalonarioEstado; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-                                <a href="#anularTalonarioModal" class="delete" onClick="selTalonarioNull('<?php echo $row->TalonarioCodigo; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Anular">&#xE14B;</i></a>
+                                <a href="#editTalonarioModal" class="edit" onClick="selTalonario('<?php echo $row->TalonarioCodigo."','".$row->TalonarioInicio."','".$row->TalonarioTermino."','".$row->TalonarioEstado; ?>'); chupalo('ancla');" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+                                <a href="#anularTalonarioModal" class="delete" onClick="selTalonarioNull('<?php echo $row->TalonarioCodigo; ?>'); chupalo('ancla');" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Anular">&#xE14B;</i></a>
                             </td>
                         </tr>
                         <?php } ?>

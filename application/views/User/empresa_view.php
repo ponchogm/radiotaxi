@@ -52,7 +52,7 @@
                         <td>
                             <a href="<?=base_url("Empresa/obtenerEmpresa/$cod");?>" class="activar"><i class="material-icons" title="Editar">&#xE86C;</i></a>
                             <a href="<?=base_url("Empresa/obtenerEmpresa/$cod");?>" class="edit"><i class="material-icons" title="Editar">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" onClick="selClienteDel('<?php echo $cod; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
+                            <a href="#deleteEmployeeModal" class="delete" onClick="selClienteDel('<?php echo $cod; ?>'); chupalo('ancla');" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
                         </td>
                     </tr>
                     <?php } ?>

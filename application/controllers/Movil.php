@@ -40,7 +40,7 @@ class Movil extends CI_Controller {
 
             $config['total_rows'] = $this->MovilModel->num_movil();
 
-            $config['per_page'] = 10;
+            $config['per_page'] = 20;
 
             $config['uri_segment'] = 3;
 

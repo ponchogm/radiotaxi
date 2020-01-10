@@ -20,10 +20,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       ============================================= -->
       <link rel="stylesheet" href="<?= base_url('assets/css/panel.css');?>">
         <script type="text/javascript">
-     
+           function chupalo(h){
+            //alert("Hola");
+            var top = document.getElementById(h).offsetTop; //Getting Y of target element
+            window.scrollTo(0, top);
+           }
         </script>
     </head>
     <body>
+      <div id="ancla"></div>
         <header>
           <div class="container">
               <nav class="navbar navbar-inverse">

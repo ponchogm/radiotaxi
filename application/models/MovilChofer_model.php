@@ -57,7 +57,7 @@ class MovilChofer_model extends CI_Model{
      * Retorna cantidad registros de una tabla en la base de datos
      */
 	function num_movilchofer(){
-		$number = $this->db->query("select count(*) as number from movilchofer")->row()->number;
+		$number = $this->db->query("select count(*) as number from movilchofer, movil, chofer WHERE movilchofer.MovilCodigo = movil.MovilCodigo AND movilchofer.ChoferRut = chofer.ChoferRut")->row()->number;
 			return intval($number);
 	}
 	/**

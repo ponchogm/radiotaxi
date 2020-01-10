@@ -60,15 +60,15 @@
                         <td><?= $row->ChoferCelular;?></td>
                         <td><?=$row->ComunaNombre;?></td>
                         <td>
-                            <a href="#editEmployeeModal" class="edit" onClick="selChofer('<?php echo $rut."','".$row->ChoferNombres."','".$row->ChoferApellidoPat."','".$row->ChoferApellidoMat."','".$row->ChoferDireccion."','".$row->ChoferFono."','".$row->ChoferCelular."','".$row->ComunaCodigo; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" onClick="selChoferDel('<?php echo $rut; ?>')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
+                            <a href="#editEmployeeModal" class="edit" onClick="selChofer('<?php echo $rut."','".$row->ChoferNombres."','".$row->ChoferApellidoPat."','".$row->ChoferApellidoMat."','".$row->ChoferDireccion."','".$row->ChoferFono."','".$row->ChoferCelular."','".$row->ComunaCodigo; ?>'); chupalo('ancla');" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+                            <a href="#deleteEmployeeModal" class="delete" onClick="selChoferDel('<?php echo $rut; ?>'); chupalo('ancla');" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
                         </td>
                     </tr>
                     <?php } ?>
                 </tbody>
             </table>
             <div class="clearfix" id="pagination">
-                <div class="hint-text">Mostrando <b>10</b> de <b><?php echo $total_reg; ?></b> registros</div>
+                <div class="hint-text">Mostrando <b>7</b> de <b><?php echo $total_reg; ?></b> registros</div>
                     <?php echo $pagination; ?>
             </div>
         </div>

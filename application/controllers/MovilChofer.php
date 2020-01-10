@@ -37,7 +37,7 @@ class MovilChofer extends CI_Controller {
 
             $config['total_rows'] = $this->MovilChoferModel->num_movilchofer();
 
-            $config['per_page'] = 10;
+            $config['per_page'] = 20;
 
             $config['uri_segment'] = 3;
 
