@@ -74,8 +74,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administración <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li><a href="#">Balance</a></li>
-                          <li><a href="#">Pagos</a></li>
+                          <li><a href="Balance">Balance</a></li>
+                          <li><a href="#">Ciclos</a></li>
                           <li><a href="#">Consulta</a></li>
                         </ul>
                       </li>
