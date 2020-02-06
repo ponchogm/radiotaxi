@@ -9,9 +9,14 @@ class Balance_model extends CI_Model{
      */
 	function guardarIngreso($data){
 		$hoy = date("d/m/Y");
+		$mes = date('m');
+		$anio = date('Y');
 		$data = array(
         		'fecha' => $hoy,
-        		'Ingreso' => str_replace(".", "", $data['montoIn']),
+        		'mes' => $mes,
+        		'anio' => $anio,
+        		'ingreso' => str_replace(".", "", $data['montoIn']),
+        		'egreso' => '0',
         		'cuenta' => $data['cuentaIn']
 			);
 		
@@ -22,9 +27,14 @@ class Balance_model extends CI_Model{
      */
 	function guardarEgreso($data){
 		$hoy = date("d/m/Y");
+		$mes = date('m');
+		$anio = date('Y');
 		$data = array(
         		'fecha' => $hoy,
-        		'Egreso' => str_replace(".", "", $data['montoEg']),
+        		'mes' => $mes,
+        		'anio' => $anio,
+        		'egreso' => str_replace(".", "", $data['montoEg']),
+        		'ingreso' => '0',
         		'cuenta' => $data['cuentaEg']
 			);
 		
@@ -35,6 +45,10 @@ class Balance_model extends CI_Model{
      */
 	function ver_todo(){
 
+		$mes = date('m');
+		$anio = date('Y');
+		$this->db->where('mes', $mes);
+		$this->db->where('anio', $anio);
 		$query = $this->db->get('balance');
 		if($query->num_rows() > 0){
 			return $query;
@@ -58,4 +72,54 @@ class Balance_model extends CI_Model{
 		$consulta = $this->db->query($query);
 		return $consulta->result();
 	}
+	/**
+     * Suma todos los ingresos segun mes y año
+     */
+	function sumaIngresos2($data){
+		$year = $data['year'];
+        $mes = $data['month'];
+		$query = "SELECT SUM(ingreso) AS TotalIngresos FROM balance WHERE anio = '$year' AND mes = '$mes'";
+		$consulta = $this->db->query($query);
+		return $consulta->result();
+	}
+	/**
+     * Suma todos los egresos segun mes y año
+     */
+	function sumaEgresos2($data){
+		$year = $data['year'];
+        $mes = $data['month'];
+		$query = "SELECT SUM(egreso) AS TotalEgresos FROM balance WHERE anio = '$year' AND mes = '$mes'";
+		$consulta = $this->db->query($query);
+		return $consulta->result();
+	}
+	 /**
+     * Obtiene la suma de los valores que pagan los moviles de manera mensual mes actual
+     */
+       function sumaValoresMes(){
+       	$year = date('Y');
+        $mes = date('m');
+		$query = "SELECT SUM(valor_mes) AS TotalMovil FROM valor_mensual WHERE anio = $year AND mes = $mes";
+		$consulta = $this->db->query($query);
+		return $consulta->result();
+	}
+	/**
+     * Muestra todos los Registros de la tabla
+     */
+	function ver_todo_mes($data){
+		$year = $data['year'];
+        $mes = $data['month'];
+		$query = ("SELECT * FROM balance WHERE anio = '$year' AND mes = '$mes'");
+		$consulta = $this->db->query($query);
+        return $consulta->result();
+	}
+	/**
+     * Obtiene los valores segun mes y año
+     */
+        public function buscar_total($data){
+        	$year = $data['year'];
+        	$mes = $data['month'];
+            $sql = ("SELECT SUM(valor_mes) AS TotalMovil FROM valor_mensual WHERE anio = '$year' AND mes = '$mes'");
+            $consulta = $this->db->query($sql);
+            return $consulta->result();
+        }
 }

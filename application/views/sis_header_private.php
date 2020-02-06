@@ -50,6 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <li><a href="<?= base_url('Movil/mostrar');?>">Moviles</a></li>
                           <li><a href="<?= base_url('Chofer/mostrar');?>">Choferes</a></li>
                           <li><a href="<?= base_url('MovilChofer/mostrar');?>">Movil-Chofer</a></li>
+                          <li><a href="<?= base_url('Valor');?>">Valor Movil Mes</a></li>
                         </ul>
                       </li>
                       <li class="dropdown">
@@ -74,7 +75,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administración <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li><a href="Balance">Balance</a></li>
+                          <li><a href="<?= base_url('Balance');?>">Balance</a></li>
                           <li><a href="#">Ciclos</a></li>
                           <li><a href="#">Consulta</a></li>
                         </ul>

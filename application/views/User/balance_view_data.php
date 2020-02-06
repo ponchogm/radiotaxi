@@ -32,9 +32,9 @@
                         //echo $dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y') ;
                         //Salida: Viernes 24 de Febrero del 2012
                         ?>
-                        Mes: <?php echo $meses1[date('n')-1]; ?>
+                        Mes: <!-- <?php echo $meses1[date('n')-1]; ?> -->
                         <p>
-                        Año: <?php echo date('Y'); ?>
+                        Año: <!-- <?php echo date('Y'); ?> -->
                         <p>
                         <?php foreach($total_movil as $row){ ?>
                                     <?php 
@@ -44,7 +44,7 @@
                         <?php } ?>
                     </div>
                     <div id="select" class="col-sm-6">
-                        <form class="form-inline" name="buscar_form" id="buscar_form"> 
+                        <form class="form-inline" name="buscar_form" id="buscar_form">
                           <div class="form-group">
                             <label for="email">Mes:&nbsp;</label>
                             <select id="month" name="month" class="form-control">
@@ -77,7 +77,7 @@
                       </tr>
                      </thead>
                      <tbody>
-                     <?php foreach($ver_reg->result() as $row){ ?>
+                     <?php foreach($ver as $row){ ?>
                         <?php
                             $ingreso = $row->ingreso;
                             $egreso = $row->egreso;
@@ -103,13 +103,13 @@
                         <tr>
                             <td></td>
                             <td><strong>Totales</strong></td>
-                            <?php foreach($total_in as $row){ ?>
+                            <?php foreach($ingresos as $row){ ?>
                             <?php
                                 $totin = $row->TotalIngresos;
                             ?>
                             <td class="success"><strong>$<?= number_format($totin, 0, ',', '.'); ?></strong></td>
                             <?php } ?>
-                            <?php foreach($total_eg as $row){ ?>
+                            <?php foreach($egresos as $row){ ?>
                             <?php
                                 $toteg = $row->TotalEgresos;
                             ?>
@@ -131,7 +131,6 @@
                 
         </div>
 </div>
-<div id="iframe"></div>
 <!-- Modal de Ingresos -->
     <div id="ingresos" class="modal fade">
         <div class="modal-dialog">
@@ -208,6 +207,10 @@
             $('#idt').val(cod);
             //console.log(id);
         }
+    var totIng;
+    var totEg;
+    var totMes;
+    var saldo;
     $(document).ready(function(){
             //  guardar nuevo ingreso
             $("#guardarIngreso_btn").click(function(e){
@@ -278,6 +281,8 @@
             $("#buscar_btn").click(function(e){
                 e.preventDefault();
                         var datax = $('#buscar_form').serializeArray();
+                        $("#valor_tb tbody").html('');
+                        $("#fecha").html('');
                         $.each(datax, function(i, field){
                             console.log("contenido del form = "+ field.name + ":" + field.value + " ");
                         });
@@ -285,7 +290,7 @@
                                    data: datax,    // En data se puede utilizar un objeto JSON, un array o un query string
                                    type: "POST",   //Cambiar a type: POST si necesario
                                    dataType: "json",  // Formato de datos que se espera en la respuesta
-                                   url: "<?=base_url();?>Balance/view_list",  // URL a la que se enviará la solicitud Ajax
+                                   url: "<?=base_url();?>Balance/buscar_total",  // URL a la que se enviará la solicitud Ajax
                             })
                            .done(function( data, textStatus, jqXHR ) {
                                 if ( console && console.log ) {
@@ -293,9 +298,7 @@
                                     + " \n textStatus : " + textStatus
                                     + " \n jqXHR.status : " + jqXHR.status );
                                 }
-                                        var salida = '';
-                                        salida = '<iframe src="<?=base_url();?>Balance/view_list"></iframe>';
-                                        /*var res = JSON.parse(data);
+                                        var res = JSON.parse(data);
                                         console.log(res);
                                         //Aca formateo la respuesta
                                         var output = '';
@@ -305,9 +308,9 @@
                                              'El valor total de la Fecha requerida es de: '+
 
                                              '<p>$ '+new Intl.NumberFormat("de-DE").format(item.TotalMovil)+'</p>';
-                                        });*/
-                                        $("#iframe").append(salida);
-                            })
+                                        });
+                                        $("#fecha").append(output);
+                                })
                             .fail(function( jqXHR, textStatus, errorThrown ) {
                                     if ( console && console.log ) {
                                         console.log( " La solicitud ha fallado,  textStatus : " +  textStatus 
