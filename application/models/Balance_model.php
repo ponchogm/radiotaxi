@@ -46,6 +46,7 @@ class Balance_model extends CI_Model{
 	function ver_todo(){
 
 		$mes = date('m');
+		//$mes = 1;
 		$anio = date('Y');
 		$this->db->where('mes', $mes);
 		$this->db->where('anio', $anio);

@@ -351,7 +351,7 @@
                                             output +=
                                             '<tr>' +
                                                 '<td>'+item.id_movil+'</td>'+
-                                                '<td>'+item.valor_mes+'</td>'+
+                                                '<td>$'+new Intl.NumberFormat("de-DE").format(item.valor_mes)+'</td>'+
                                                 '<td><a href="#editValModal" class="edit" onClick="selValor(\''+item.id+'\',\''+item.id_movil+'\',\''+item.valor_mes+'\',\''+item.mes+'\',\''+item.anio+'\'); chupalo(\''+ancla+'\');" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>'+
                                                 '<a href="#deleteModal" class="delete" onClick="selValorDel(\''+item.id+'\') chupalo(\''+ancla+'\');" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>'+
                                                 '</td>'+

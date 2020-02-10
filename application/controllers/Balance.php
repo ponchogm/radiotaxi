@@ -32,9 +32,9 @@ class Balance extends CI_Controller {
     public function index(){
 
             $data['meses'] = $this->ComboBoxes->meses();
-            $data['ver_reg'] = $this->BalanceModel->ver_todo();
+            /*$data['ver_reg'] = $this->BalanceModel->ver_todo();
             $data['total_in'] = $this->BalanceModel->sumaIngresos();
-            $data['total_eg'] = $this->BalanceModel->sumaEgresos();
+            $data['total_eg'] = $this->BalanceModel->sumaEgresos();*/
             $data['total_movil'] = $this->BalanceModel->sumaValoresMes();
 
             if (!$this->session->userdata('USER_NAME')) {

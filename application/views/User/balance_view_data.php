@@ -3,7 +3,7 @@
             <div class="table-title">
                <div class="row">
                     <div class="col-sm-4">
-                        <h2>Gestión <b>Ingresos / Egresos</b></h2>
+                        <h2>Balance <b>Mensual</b></h2>
                         <?php
                         $rol = $this->session->userdata('USER_ROL');
                         $nombre = $this->session->userdata('USERNAME');
@@ -13,9 +13,7 @@
                         ?>
                     </div>
                     <div class="col-sm-6">
-                        <a href="#talonMovil" data-toggle="modal" class="btn btn-warning"><i class="material-icons">&#xE147;</i> <span>Periodos</span></a>
-                        <a href="#egresos" data-toggle="modal"class="btn btn-danger"><i class="material-icons">&#xE147;</i> <span>Egresos</span></a>
-                        <a href="#ingresos" data-toggle="modal" class="btn btn-primary"><i class="material-icons">&#xE147;</i> <span>Ingresos</span></a>           
+                        <a href="<?= base_url('Balance');?>" class="btn btn-primary"><i class="material-icons">&#xE147;</i> <span>Volver</span></a>           
                     </div>
                     <!-- <div class="col-sm-2">
                         <form><span><input type="text" style="color: #a0a0a0;" class="form-control" name="buscar" id="buscar" placeholder="Buscar datos"></span></form>                       
@@ -23,49 +21,14 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12">
-                    <div id="fecha" class="col-sm-6">
-                        <?php
-                        //$dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
-                        $meses1 = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-     
-                        //echo $dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y') ;
-                        //Salida: Viernes 24 de Febrero del 2012
-                        ?>
-                        Mes: <!-- <?php echo $meses1[date('n')-1]; ?> -->
-                        <p>
-                        Año: <!-- <?php echo date('Y'); ?> -->
-                        <p>
+                <div id="pinta" class="col-sm-12">
+                    <p>
                         <?php foreach($total_movil as $row){ ?>
                                     <?php 
                                         $totalmes = $row->TotalMovil; 
                                         echo "Valor total móviles $<strong>".number_format($totalmes, 0, ',', '.')."</strong>";
                                     ?>
                         <?php } ?>
-                    </div>
-                    <div id="select" class="col-sm-6">
-                        <form class="form-inline" name="buscar_form" id="buscar_form">
-                          <div class="form-group">
-                            <label for="email">Mes:&nbsp;</label>
-                            <select id="month" name="month" class="form-control">
-                                <?php foreach ($meses as $i) {
-                                        echo '<option value="'. $i->MesesCodigo .'">'. $i->MesesNombre .'</option>';
-                                } ?>
-                            </select>
-                          </div>
-                          <div class="form-group">
-                            <label for="pwd">&nbsp;Año:&nbsp;</label>
-                            <select id="year" name="year" class="form-control">
-                                <option value="2020">2020</option>
-                                <option value="2019">2019</option>
-                                <option value="2018">2018</option>
-                            </select>
-                          </div>
-                          &nbsp;&nbsp;&nbsp;&nbsp;
-                          <button type="submit" class="btn btn-default" id="buscar_btn">Seleccionar</button>
-
-                        </form> 
-                    </div>
                     <table class="table table-striped table-hover" id="valor_tb">
                      <thead>   
                       <tr>  
@@ -127,6 +90,7 @@
                         </tr>
                      </tbody>   
                     </table>
+                    <button class='btn btn-success'>Exportar a Excel</button>
                 </div>
                 
         </div>

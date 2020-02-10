@@ -24,7 +24,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <div id="fecha" class="col-sm-6">
+                    <div id="fecha" class="col-sm-5">
                         <?php
                         //$dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
                         $meses1 = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
@@ -39,14 +39,14 @@
                         <?php foreach($total_movil as $row){ ?>
                                     <?php 
                                         $totalmes = $row->TotalMovil; 
-                                        echo "Valor total móviles $<strong>".number_format($totalmes, 0, ',', '.')."</strong>";
+                                        echo "Valor total móviles mes actual $<strong>".number_format($totalmes, 0, ',', '.')."</strong>";
                                     ?>
                         <?php } ?>
                     </div>
-                    <div id="select" class="col-sm-6">
-                        <form class="form-inline" name="buscar_form" id="buscar_form"> 
+                    <div id="select" class="col-sm-7">
+                        <form class="form-inline" name="buscar_form" id="buscar_form" method="POST" action="<?=base_url();?>Balance/buscar_total"> 
                           <div class="form-group">
-                            <label for="email">Mes:&nbsp;</label>
+                            <label for="email">Seleccionar Periódo - Mes:&nbsp;</label>
                             <select id="month" name="month" class="form-control">
                                 <?php foreach ($meses as $i) {
                                         echo '<option value="'. $i->MesesCodigo .'">'. $i->MesesNombre .'</option>';
@@ -66,72 +66,11 @@
 
                         </form> 
                     </div>
-                    <table class="table table-striped table-hover" id="valor_tb">
-                     <thead>   
-                      <tr>  
-                        <th>Fecha</th>
-                        <th>Cuenta</th>
-                        <th>Ingresos</th>
-                        <th>Egresos</th>
-                        <!-- <th>Acciones</th> -->
-                      </tr>
-                     </thead>
-                     <tbody>
-                     <?php foreach($ver_reg->result() as $row){ ?>
-                        <?php
-                            $ingreso = $row->ingreso;
-                            $egreso = $row->egreso;
-
-                            if($ingreso != ''){
-                                $ingreso = $ingreso;
-                                }else{
-                                    $ingreso = 0;
-                                }
-                            if($egreso != ''){
-                                $egreso = $egreso;
-                                }else{
-                                    $egreso = 0;
-                                }
-                        ?>
-                        <tr>
-                            <td><?= $row->fecha; ?></td>
-                            <td><?= $row->cuenta; ?></td>
-                            <td>$<?= number_format($ingreso, 0, ',', '.'); ?></td>
-                            <td>$<?= number_format($egreso, 0, ',', '.'); ?></td>
-                        </tr>
-                        <?php } ?>
-                        <tr>
-                            <td></td>
-                            <td><strong>Totales</strong></td>
-                            <?php foreach($total_in as $row){ ?>
-                            <?php
-                                $totin = $row->TotalIngresos;
-                            ?>
-                            <td class="success"><strong>$<?= number_format($totin, 0, ',', '.'); ?></strong></td>
-                            <?php } ?>
-                            <?php foreach($total_eg as $row){ ?>
-                            <?php
-                                $toteg = $row->TotalEgresos;
-                            ?>
-                            <td class="danger"><strong>$<?= number_format($toteg, 0, ',', '.'); ?></strong></td>
-                            <?php } ?>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><strong>Saldo</strong></td>
-                            <?php
-                                $saldo = ($totin + $totalmes) - $toteg;
-                            ?>
-                            <td class="warning"><strong>$<?= number_format($saldo, 0, ',', '.'); ?></strong></td>
-                            <td></td>
-                        </tr>
-                     </tbody>   
-                    </table>
+           <!-- aca va la tabla -->
                 </div>
                 
         </div>
 </div>
-<div id="iframe"></div>
 <!-- Modal de Ingresos -->
     <div id="ingresos" class="modal fade">
         <div class="modal-dialog">
@@ -275,47 +214,6 @@
                             location.reload();
                         });
             //Búsqueda
-            $("#buscar_btn").click(function(e){
-                e.preventDefault();
-                        var datax = $('#buscar_form').serializeArray();
-                        $.each(datax, function(i, field){
-                            console.log("contenido del form = "+ field.name + ":" + field.value + " ");
-                        });
-                           $.ajax({
-                                   data: datax,    // En data se puede utilizar un objeto JSON, un array o un query string
-                                   type: "POST",   //Cambiar a type: POST si necesario
-                                   dataType: "json",  // Formato de datos que se espera en la respuesta
-                                   url: "<?=base_url();?>Balance/view_list",  // URL a la que se enviará la solicitud Ajax
-                            })
-                           .done(function( data, textStatus, jqXHR ) {
-                                if ( console && console.log ) {
-                                    console.log(" data msg : "+ data.msg 
-                                    + " \n textStatus : " + textStatus
-                                    + " \n jqXHR.status : " + jqXHR.status );
-                                }
-                                        var salida = '';
-                                        salida = '<iframe src="<?=base_url();?>Balance/view_list"></iframe>';
-                                        /*var res = JSON.parse(data);
-                                        console.log(res);
-                                        //Aca formateo la respuesta
-                                        var output = '';
-                                        $.each(data, function(i,item){
-                                            totMes = item.TotalMovil; 
-                                            output +=
-                                             'El valor total de la Fecha requerida es de: '+
 
-                                             '<p>$ '+new Intl.NumberFormat("de-DE").format(item.TotalMovil)+'</p>';
-                                        });*/
-                                        $("#iframe").append(salida);
-                            })
-                            .fail(function( jqXHR, textStatus, errorThrown ) {
-                                    if ( console && console.log ) {
-                                        console.log( " La solicitud ha fallado,  textStatus : " +  textStatus 
-                                            + " \n errorThrown : "+ errorThrown
-                                            + " \n textStatus : " + textStatus
-                                            + " \n jqXHR.status : " + jqXHR.status );
-                                    }
-                            });
-            });
     });
     </script>

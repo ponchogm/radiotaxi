@@ -103,3 +103,68 @@
                      </tbody>   
                     </table>
                 </div>
+
+
+
+
+                         <table class="table table-striped table-hover" id="valor_tb">
+                     <thead>   
+                      <tr>  
+                        <th>Fecha</th>
+                        <th>Cuenta</th>
+                        <th>Ingresos</th>
+                        <th>Egresos</th>
+                        <!-- <th>Acciones</th> -->
+                      </tr>
+                     </thead>
+                     <tbody>
+                     <?php foreach($ver_reg->result() as $row){ ?>
+                        <?php
+                            $ingreso = $row->ingreso;
+                            $egreso = $row->egreso;
+
+                            if($ingreso != ''){
+                                $ingreso = $ingreso;
+                                }else{
+                                    $ingreso = 0;
+                                }
+                            if($egreso != ''){
+                                $egreso = $egreso;
+                                }else{
+                                    $egreso = 0;
+                                }
+                        ?>
+                        <tr>
+                            <td><?= $row->fecha; ?></td>
+                            <td><?= $row->cuenta; ?></td>
+                            <td>$<?= number_format($ingreso, 0, ',', '.'); ?></td>
+                            <td>$<?= number_format($egreso, 0, ',', '.'); ?></td>
+                        </tr>
+                        <?php } ?>
+                        <tr>
+                            <td></td>
+                            <td><strong>Totales</strong></td>
+                            <?php foreach($total_in as $row){ ?>
+                            <?php
+                                $totin = $row->TotalIngresos;
+                            ?>
+                            <td class="success"><strong>$<?= number_format($totin, 0, ',', '.'); ?></strong></td>
+                            <?php } ?>
+                            <?php foreach($total_eg as $row){ ?>
+                            <?php
+                                $toteg = $row->TotalEgresos;
+                            ?>
+                            <td class="danger"><strong>$<?= number_format($toteg, 0, ',', '.'); ?></strong></td>
+                            <?php } ?>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><strong>Saldo</strong></td>
+                            <?php
+                                $saldo = ($totin + $totalmes) - $toteg;
+                            ?>
+                            <td class="warning"><strong>$<?= number_format($saldo, 0, ',', '.'); ?></strong></td>
+                            <td></td>
+                        </tr>
+                     </tbody>   
+                    </table>
