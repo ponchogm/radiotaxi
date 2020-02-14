@@ -31,6 +31,7 @@ class Valor extends CI_Controller {
             $data['moviles'] = $this->ComboBoxes->getMoviles();
             $data['meses'] = $this->ComboBoxes->meses();
             $data['valores'] = $this->ValorModel->valores();
+            $data['anual'] = $this->ValorModel->excel();
 
             if (!$this->session->userdata('USER_NAME')) {
               redirect('Usuarios/logout', 'refresh');
@@ -144,6 +145,14 @@ class Valor extends CI_Controller {
         $resultado = $this->ValorModel->buscar($data);
 
         echo json_encode($resultado);
+
+    }
+    public function excel(){
+      $data = array('year' => trim($this->input->post('year')));
+      
+      $resultado = $this->ValorModel->excel($data);
+      echo json_encode($resultado);
+
 
     }
 

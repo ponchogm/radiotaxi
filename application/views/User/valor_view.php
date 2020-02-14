@@ -13,7 +13,8 @@
                         ?>
                     </div>
                     <div class="col-sm-8">
-                        <a href="#valores" data-toggle="modal" class="btn btn-primary"><i class="material-icons">&#xE147;</i> <span>Ingresar Valor</span></a>           
+                        <a href="#valores" data-toggle="modal" class="btn btn-primary"><i class="material-icons">&#xE147;</i> <span>Ingresar Valor</span></a>
+                        <a href="#excel" data-toggle="modal" class="btn btn-primary"><i class="material-icons">&#xE147;</i> <span>Anual</span></a>                
                     </div>
                 </div>
             </div>
@@ -118,7 +119,12 @@
                             <label for="sel1">Mes</label>
                           <select id="mes" name="mes" class="form-control">
                                 <?php foreach ($meses as $i) {
-                                    echo '<option value="'. $i->MesesCodigo .'">'. $i->MesesNombre .'</option>';
+                                        $mes = date('m');
+                                        if($mes == $i->MesesCodigo){
+                                        echo '<option value="'. $i->MesesCodigo .'" selected>'. $i->MesesNombre .'</option>';
+                                        }else{
+                                            echo '<option value="'. $i->MesesCodigo .'">'. $i->MesesNombre .'</option>';
+                                        }
                                 } ?>
                             </select>
                         </div>
@@ -168,11 +174,11 @@
                         </div>
                         <div class="form-group">
                             <label>Mes</label>
-                            <input type="text" class="form-control" name="me" id="me">
+                            <input type="text" class="form-control" name="me" id="me" disabled>
                         </div>
                         <div class="form-group">
                             <label>Año</label>
-                            <input type="text" class="form-control" name="an" id="an">
+                            <input type="text" class="form-control" name="an" id="an" disabled>
                         </div>
                         <div class="form-group">
                             <label>Valor Mes</label>
@@ -211,6 +217,50 @@
         </div>
     </div>
 <!-- Fin Anular Modal -->      
+<!-- Excel Modal HTML -->
+    <div id="excel" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">                      
+                    <h4 class="modal-title">Eliminar Asignación de Valor</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                    <div class="modal-body">
+                        <table class="table table-striped table-hover" id="movil_tb">
+                            <thead>
+                                <tr>
+                                    <th>Movil</th>
+                                    <th>mes</th>
+                                    <th>año</th>
+                                    <th>Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($anual as $row){ ?>
+                                    <?php
+
+                                    $valor1 = $row->valor_mes;
+                                    $valor2 = number_format($valor1, 0, '', '.');
+
+                                    ?>
+                                <tr>
+                                    <td><?= $row->id_movil;?></td>
+                                    <td><?= $row->mes;?></td>
+                                    <td><?= $row->anio;?></td>
+                                    <td>$<?= $valor2;?></td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                    <input type="submit" class="btn btn-danger" id="delete_btn" value="Eliminar">
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Fin Anular Modal -->    
     <script>
         function selValor(cod,mov,val,mes,ano){
             $('#co').val(cod);

@@ -70,4 +70,13 @@ class Valor_model extends CI_Model{
         $this->db->where('id', $data);
         return $query = $this->db->delete('valor_mensual'); // Le pongo return para que le avise al controlador que hizo o no la eliminación
     }
+
+    function excel(){
+        $year = date('Y');
+            //$mes = date('m');
+            //$mes = '2';
+            $sql = ("SELECT * FROM valor_mensual WHERE anio = $year ORDER BY id_movil");
+            $consulta = $this->db->query($sql);
+            return $consulta->result();
+    }
 }
